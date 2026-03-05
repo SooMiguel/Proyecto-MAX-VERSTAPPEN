@@ -1,17 +1,78 @@
+// --- FORZAR SCROLL AL INICIO AL RECARGAR ---
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
+// 1. INICIALIZAR LENIS (SMOOTH SCROLL GLOBAL)
+const lenis = new Lenis({
+    duration: 1.2, 
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+    smoothWheel: true
+});
+
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+});
+gsap.ticker.lagSmoothing(0);
+
+// --- SCROLLBAR INTELIGENTE Y BOTÓN ---
+let scrollTimeout;
+const htmlElement = document.documentElement;
+const backToTopBtn = document.getElementById('backToTop');
+
+htmlElement.style.setProperty('--scroll-thumb-color', 'transparent');
+htmlElement.style.setProperty('--scroll-border-color', 'transparent');
+
+lenis.on('scroll', (e) => {
+    const currentScroll = e.scroll;
+
+    if (currentScroll > 20) {
+        htmlElement.style.setProperty('--scroll-thumb-color', '#4a4a4a');
+        htmlElement.style.setProperty('--scroll-border-color', '#010204');
+    } else {
+        htmlElement.style.setProperty('--scroll-thumb-color', '#ffffff');
+        htmlElement.style.setProperty('--scroll-border-color', '#010204');
+    }
+
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+        htmlElement.style.setProperty('--scroll-thumb-color', 'transparent');
+        htmlElement.style.setProperty('--scroll-border-color', 'transparent');
+    }, 800);
+
+    if (backToTopBtn) {
+        if (currentScroll > 500) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    }
+});
+
+if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', () => {
+        lenis.scrollTo(0, { duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     gsap.registerPlugin(ScrollTrigger);
 
     // --- 1. ANIMACIÓN DE ENTRADA ---
     const tl = gsap.timeline();
 
+    // Entra el logo de Max original en el centro
     tl.to(".logo", { duration: 1.2, opacity: 1, scale: 1, ease: "power2.out" })
         .to(".logo", { duration: 0.8, opacity: 0, scale: 0.9, ease: "power2.in", delay: 0.8 })
         .to("#preloader", { duration: 1.2, y: "-100%", ease: "power4.inOut" })
         .to([".base-img", ".helmet-img"], { duration: 1.5, y: 0, opacity: 1, ease: "power3.out", stagger: 0 }, "-=0.8")
         .to(".site-header", { duration: 1, y: 0, opacity: 1, ease: "power3.out" }, "-=1.2")
-        .to(".next-race-box", { duration: 1, opacity: 1, ease: "power3.out" }, "-=1");
+        // 🪄 AMBOS CUADROS ENTRAN JUNTOS
+        .to(".next-race-box, .team-info-box", { duration: 1, x: 0, opacity: 1, ease: "power3.out" }, "-=1");
 
-    // --- 2. LÓGICA DE SCROLL (EL EFECTO TARJETA Y FIRMA SINCRONIZADA) ---
+    // --- 2. LÓGICA DE SCROLL ---
     const sigPath = document.querySelector('.sig-path');
 
     if (sigPath) {
@@ -29,34 +90,22 @@ document.addEventListener("DOMContentLoaded", () => {
             scrollTrigger: {
                 trigger: ".hero-pin-wrapper",
                 start: "top top",
-                // 🪄 Aumentamos el final a 2500 para que el scroll sea más largo y la firma más lenta
-                end: "+=1500",
-                scrub: 2, // 🪄 Subimos el scrub a 2 para que el movimiento sea más suave y menos brusco
+                end: "+=2000",
+                scrub: 1,
                 pin: true,
             }
         });
 
-        // 🪄 EL ARREGLO DE LA CAJA (fromTo garantiza que la caja vuelva a verse al subir)
-        scrollTl.fromTo(".next-race-box", { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.5 }, 0);
+        // 🪄 AMBOS CUADROS SE DESVANECEN AL BAJAR
+        scrollTl.fromTo(".next-race-box, .team-info-box",
+            { autoAlpha: 1 },
+            { autoAlpha: 0, duration: 0.5 }, 0
+        );
 
-        // 🪄 LA SINCRONIZACIÓN PERFECTA: Estos 3 ocurren exactamente a la vez (duran 4 segs)
-
-        // 1. 🪄 CAMBIO DE TAMAÑO: La tarjeta se encoje mucho más (scale 0.45) para revelar más fondo.
-        scrollTl.to(".foreground-card", { scale: 0.45, borderRadius: "20px", duration: 8 }, 0);
-
-        // 2. La tarjeta se oscurece (Efecto dimmer opaco que pediste)
-        scrollTl.to(".card-dimmer", { opacity: 0.85, duration: 8 }, 0);
-
-// 3. 🪄 FIRMA MUCHO MÁS LENTA: 
-        // Aumentamos la duración a 8 y usamos un ease más suave
-        scrollTl.to(sigPath, { 
-            strokeDashoffset: 0, 
-            duration: 8, 
-            ease: "none" // "none" hace que se dibuje exacto a la velocidad de tu dedo en el scroll
-        }, 0);
-        
-        // 4. El relleno ocurre al final del dibujo largo
-        scrollTl.to(sigPath, { fill: "#ffffff", duration: 1 }, 8); 
+        scrollTl.to(".foreground-card", { scale: 0.45, borderRadius: "20px", ease: "power1.inOut", duration: 4 }, 0)
+            .to(".card-dimmer", { opacity: 0.85, duration: 4 }, 0)
+            .to(sigPath, { strokeDashoffset: 0, duration: 4, ease: "power1.inOut" }, 0)
+            .to(sigPath, { fill: "#ffffff", duration: 0.5 }, 4);
     }
 
     // --- 3. LÓGICA DEL MENÚ ---
@@ -64,7 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const fullscreenMenu = document.querySelector('.fullscreen-menu');
     const col1 = document.querySelector('.col-1');
     const col2 = document.querySelector('.col-2');
-
     const menuItems = document.querySelectorAll('.menu-right [data-img]');
     const allMenuImages = document.querySelectorAll('.img-column img');
     const defaultImg = document.getElementById('img-1');
@@ -93,11 +141,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- 4. MATEMÁTICA DEL BLOB ADAPTADO AL NUEVO SCALE ---
+    // --- 4. MATEMÁTICA DEL BLOB ---
     const blobPath = document.getElementById("blobPath");
     const blobVisual = document.getElementById("blobPathVisual");
     const helmetImg = document.querySelector('.helmet-img');
-
     let mouseActive = false;
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
@@ -115,7 +162,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const ww = window.innerWidth;
         const wh = window.innerHeight;
         const dur = 0.7;
-
         autoTl.set(blobData, { scale: 0, x: -200, y: wh * 0.15 })
             .to(blobData, { scale: 1, duration: 0.6, ease: "power2.out" }, 0)
             .to(blobData, { x: ww + 200, y: wh * 0.30, duration: dur, ease: "sine.inOut" }, 0)
@@ -130,7 +176,6 @@ document.addEventListener("DOMContentLoaded", () => {
             .to(blobData, { scale: 0, duration: 0.6, ease: "power2.in" }, "-=0.6")
             .to({}, { duration: 0.5 });
     }
-
     buildAutoTimeline();
 
     window.addEventListener('resize', () => {
@@ -159,7 +204,6 @@ document.addEventListener("DOMContentLoaded", () => {
         mouseActive = false;
         autoTl.restart();
     });
-
     autoTl.play();
 
     function getSmoothPath(points) {
@@ -205,7 +249,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function animate() {
-        // Obtenemos el scale actual de la tarjeta para adaptar el blob local
         const currentScale = gsap.getProperty(".foreground-card", "scale") || 1;
         const cardRect = document.querySelector('.foreground-card').getBoundingClientRect();
 
@@ -229,11 +272,35 @@ document.addEventListener("DOMContentLoaded", () => {
         blobVisual.setAttribute("d", getSmoothPath(visualPoints));
 
         const imgContainer = document.querySelector('.image-container');
-        const maskPoints = createBlobPoints(currentX - imgContainer.offsetLeft, currentY - imgContainer.offsetTop, vx / currentScale, vy / currentScale, blobData.scale);
-        blobPath.setAttribute("d", getSmoothPath(maskPoints));
+        if (imgContainer) {
+            const maskPoints = createBlobPoints(currentX - imgContainer.offsetLeft, currentY - imgContainer.offsetTop, vx / currentScale, vy / currentScale, blobData.scale);
+            blobPath.setAttribute("d", getSmoothPath(maskPoints));
+        }
 
         requestAnimationFrame(animate);
     }
-
     animate();
+
+    // --- 5. ANIMACIÓN DE REVELADO DE FRASE ---
+    const quoteLines = document.querySelectorAll(".quote-line");
+
+    if (quoteLines.length > 0) {
+        quoteLines.forEach((line, index) => {
+            const cover = line.querySelector(".reveal-cover");
+
+            gsap.set(cover, { scaleX: 1, transformOrigin: "right center" });
+
+            gsap.to(cover, {
+                scrollTrigger: {
+                    trigger: line,
+                    start: "top 80%", 
+                    toggleActions: "play none none reverse" 
+                },
+                scaleX: 0, 
+                duration: 0.8, 
+                ease: "power3.inOut",
+                delay: index * 0.15
+            });
+        });
+    }
 });
