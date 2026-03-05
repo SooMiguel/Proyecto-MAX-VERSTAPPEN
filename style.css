@@ -4,105 +4,18 @@
     box-sizing: border-box;
 }
 
-/* ACTUALIZA EL BODY PARA EL FONDO MULTICOLOR RED BULL */
 body {
-    background-color: #020408; /* Color base oscuro */
-    /* Mezclamos 3 luces: Una roja suave arriba, una amarilla suave abajo, y el azul marino en el centro */
-    background-image: 
-        radial-gradient(circle at 15% 15%, rgba(204, 0, 0, 0.15) 0%, transparent 40%), /* Reflejo Rojo */
-        radial-gradient(circle at 85% 85%, rgba(252, 215, 0, 0.10) 0%, transparent 40%), /* Reflejo Amarillo */
-        radial-gradient(circle at 50% 50%, #0a1428 0%, #000000 80%); /* Base Azul Red Bull a Negro */
-    overflow: hidden;
+    background-color: #010204; 
+    overflow-x: hidden; 
     font-family: Arial, sans-serif;
 }
 
-#preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: #0c0c0c;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
+#preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: #0c0c0c; display: flex; justify-content: center; align-items: center; z-index: 9999; }
+.logo { width: 180px; opacity: 0; transform: scale(0.8); }
 
-.logo {
-    width: 180px;
-    opacity: 0;
-    transform: scale(0.8);
-}
-
-.hero {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    padding-bottom: 0;
-}
-
-/* ACTUALIZA EL CONTENEDOR PARA ELIMINAR EL BORDE AZUL DE LA FOTO */
-.image-container {
-    position: relative;
-    width: 750px;
-    max-width: 95vw;
-    display: flex;
-    justify-content: center;
-    
-    /* 🪄 Hacemos el recorte más "apretado" (de 50/85 pasamos a 40/70) */
-    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 70%);
-    mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 70%);
-}
-
-/* 1. Capa Fondo */
-.base-img {
-    width: 100%;
-    display: block;
-    object-fit: cover;
-    position: relative;
-    z-index: 1; /* Al fondo */
-    opacity: 0; /* Para animar con GSAP */
-    transform: translateY(50px);
-}
-
-/* 2. Capa Intermedia: Mancha Gris (En todo el sitio) */
-.blob-svg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0; /* Por detrás de la foto base */
-}
-
-/* 3. Capa Superior: Casco enmascarado */
-.helmet-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    clip-path: url(#blobClip);
-    z-index: 2; /* Por encima de la foto base */
-    opacity: 0; /* Para animar con GSAP */
-    transform: translateY(50px);
-    object-fit: cover;
-    pointer-events: none; /* 👈 Evita que interfiera con el mouse */
-}
-
-#blobPathVisual {
-    fill: rgba(180, 180, 180, 0.20);
-    backdrop-filter: blur(2px);
-    /* Ya no necesitamos transition, el z-index hace la magia */
-}
-
-/* ===============================
-   HEADER & MENÚ
-================================== */
+/* ============================================================
+   🪄 MENÚ Y HEADER (Corregido y blindado z-index Máximo)
+=============================================================== */
 .site-header {
     position: fixed;
     top: 0;
@@ -112,280 +25,234 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    z-index: 110; /* Siempre arriba */
+    
+    /* 🛡️ BLINDAJE DE MENÚ: Z-index altísimo para estar SIEMPRE arriba */
+    z-index: 2000; 
+    
     font-family: 'Montserrat', sans-serif;
-    opacity: 0; /* Empieza oculto para animarlo con GSAP */
+    opacity: 0; /* Animado por JS */
+    pointer-events: none; /* Evita bloquear clics cuando está oculto */
 }
 
-.brand-name {
-    color: #ffffff;
-    line-height: 0.85; /* 👈 Junta más el nombre y el apellido */
-    display: flex;
-    flex-direction: column;
-}
+/* Permitir clics en los elementos internos del header */
+.site-header * { pointer-events: auto; }
 
-.first-name {
-    font-family: 'Playfair Display', serif; /* 👈 Fuente delgada y elegante */
-    font-size: 45px; /* 👈 Letra mucho más grande */
-    font-weight: 400;
-    letter-spacing: 1px;
-    font-style: italic; /* Opcional: le da un toque extra de velocidad/elegancia. Si no te gusta, bórralo */
-}
+.brand-name { color: #ffffff; line-height: 0.85; display: flex; flex-direction: column; }
+.first-name { font-family: 'Playfair Display', serif; font-size: 45px; font-weight: 400; letter-spacing: 1px; font-style: italic; }
+.last-name { font-family: 'Montserrat', sans-serif; font-size: 42px; font-weight: 900; letter-spacing: -1px; }
 
-.last-name {
-    font-family: 'Montserrat', sans-serif; /* 👈 Fuente gruesa y deportiva */
-    font-size: 42px;
-    font-weight: 900;
-    letter-spacing: -1px; /* 👈 Aprieta un poco las letras como en el diseño de Lando */
-}
+.center-logo { position: absolute; left: 50%; transform: translateX(-50%); top: 35px; }
+.center-logo img { height: 35px; width: auto; }
 
-.center-logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 35px; /* Ajustamos para que quede alineado visualmente con el texto y el botón */
-}
-
-.center-logo img {
-    height: 35px; 
-    width: auto;
-}
-
-/* ===============================
-   HEADER & MENÚ (ACTUALIZADO)
-================================== */
-.brand-name {
-    color: #ffffff;
-    line-height: 0.85; /* 👈 Junta más el nombre y el apellido */
-    display: flex;
-    flex-direction: column;
-}
-
-.first-name {
-    font-family: 'Playfair Display', serif; /* 👈 Fuente delgada y elegante */
-    font-size: 45px; /* 👈 Letra mucho más grande */
-    font-weight: 400;
-    letter-spacing: 1px;
-    font-style: italic; /* Opcional: le da un toque extra de velocidad/elegancia. Si no te gusta, bórralo */
-}
-
-.last-name {
-    font-family: 'Montserrat', sans-serif; /* 👈 Fuente gruesa y deportiva */
-    font-size: 42px;
-    font-weight: 900;
-    letter-spacing: -1px; /* 👈 Aprieta un poco las letras como en el diseño de Lando */
-}
-
-/* BOTÓN HAMBURGUESA MINIMALISTA (MÁS GRANDE) */
 .menu-btn {
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
-    width: 65px;  /* 👈 Antes 50px */
-    height: 65px; /* 👈 Antes 50px */
+    width: 65px;
+    height: 65px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 8px; /* 👈 Más separación entre líneas */
+    gap: 8px;
     cursor: pointer;
-    z-index: 105;
-    position: relative; 
-    overflow: hidden;   
+    position: relative;
+    overflow: hidden;
     transition: border-color 0.3s;
 }
+.menu-btn::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #cc0000; z-index: -1; transform: translateY(-100%); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+.menu-btn:hover::before { transform: translateY(0); }
+.menu-btn:hover { border-color: rgba(255, 255, 255, 0.8); }
 
-.menu-btn::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #cc0000; 
-    z-index: -1; 
-    transform: translateY(-100%); 
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
-}
-
-.menu-btn:hover::before {
-    transform: translateY(0);
-}
-
-.menu-btn:hover {
-    border-color: rgba(255, 255, 255, 0.8); 
-}
-
-.line {
-    width: 32px; /* 👈 Líneas más largas (antes 22px) */
-    height: 2px;
-    background-color: #ffffff;
-    transition: all 0.3s ease;
-}
-
-/* Detalle asimétrico */
+.line { width: 32px; height: 2px; background-color: #ffffff; transition: all 0.3s ease; }
 .line-1 { transform: translateX(-4px); }
 .line-2 { transform: translateX(4px); }
 
-/* Animación de la X ajustada al nuevo tamaño */
-.menu-btn.active .line-1 {
-    transform: translateY(5px) rotate(45deg);
-}
-.menu-btn.active .line-2 {
-    transform: translateY(-5px) rotate(-45deg);
-}
-/* ===============================
-   MENÚ PANTALLA COMPLETA (DISEÑO 2 COLUMNAS)
-================================== */
+/* Menú Activo (JS) */
+.menu-btn.active .line-1 { transform: translateY(5px) rotate(45deg); }
+.menu-btn.active .line-2 { transform: translateY(-5px) rotate(-45deg); }
+
 .fullscreen-menu {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
-    background: rgba(2, 4, 8, 0.95); /* Fondo más sólido para leer bien */
-    backdrop-filter: blur(15px); 
-    z-index: 101; 
+    background: rgba(2, 4, 8, 0.98); /* Fondo opaco Red Bull */
+    backdrop-filter: blur(15px);
+    
+    /* 🛡️ Debajo del header pero encima del hero */
+    z-index: 1500; 
+    
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.5s ease;
-    display: flex; /* Nos aseguramos de que ocupe todo */
+    display: flex;
+}
+.fullscreen-menu.active { opacity: 1; pointer-events: all; }
+
+.menu-layout { width: 100%; height: 100%; display: flex; max-width: 1800px; margin: 0 auto; }
+.menu-left { width: 60%; height: 100%; display: flex; justify-content: flex-start; align-items: center; gap: 40px; overflow: hidden; padding-left: 50px; }
+.img-column { display: flex; flex-direction: column; gap: 40px; height: 140vh; justify-content: center; will-change: transform; }
+.img-column img { width: 380px; height: 380px; object-fit: cover; filter: grayscale(100%); opacity: 0.5; transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); border-radius: 4px; pointer-events: none; }
+.img-column img.color-active { filter: grayscale(0%); opacity: 1; transform: scale(1.05); z-index: 10; box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
+
+.menu-right { width: 40%; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding-left: 20px; z-index: 10; }
+.fullscreen-menu ul { list-style: none; text-align: left; }
+.fullscreen-menu li { margin: 15px 0; }
+.fullscreen-menu a { display: inline-block; font-size: 85px; font-weight: 900; font-family: 'Montserrat', sans-serif; text-transform: uppercase; text-decoration: none; line-height: 0.9; background: linear-gradient(to bottom, #cc0000 50%, #ffffff 50%); background-size: 100% 200%; background-position: 0% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; transition: background-position 0.3s ease-in-out; }
+.fullscreen-menu a:hover { background-position: 0% 0%; }
+.current-page { display: inline-block; font-size: 85px; font-weight: 900; font-family: 'Montserrat', sans-serif; text-transform: uppercase; color: #ffffff; position: relative; cursor: default; line-height: 0.9; }
+.wavy-line { position: absolute; top: 50%; left: -5%; width: 110%; height: 30px; transform: translateY(-50%); pointer-events: none; }
+
+/* ============================================================
+   EFECTO "TARJETA", FONDO Y DIMMER (Tus cambios intactos)
+=============================================================== */
+.hero-pin-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1; /* Nivel base hero */
 }
 
-.fullscreen-menu.active {
-    opacity: 1;
-    pointer-events: all;
+/* Patrón aerodinámico de fondo neón sólido */
+.background-reveal-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    
+    /* 🪄 FONDO MEJORADO: Azul Red Bull profundo con degradado */
+    background: radial-gradient(circle at center, #050a1a 0%, #010204 100%);
+    
+    /* 🪄 LÍNEAS VISIBLES: Ondas en azul eléctrico tenue */
+    background-image: url("data:image/svg+xml,%3Csvg width='200' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20 Q 50 0, 100 20 T 200 20' fill='none' stroke='rgba(28, 55, 103, 0.2)' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-size: 400px 80px;
+    animation: moveWaves 20s linear infinite;
+    
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
-/* Contenedor que divide pantalla 50/50 */
-.menu-layout {
+@keyframes moveWaves {
+    0% { background-position: 0 0; }
+    100% { background-position: 200px 40px; }
+}
+
+.marquee-row {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 110px; 
+    font-weight: 900;
+    text-transform: uppercase;
+    white-space: nowrap; 
+    display: flex;
+    line-height: 1;
+}
+
+/* Fila 1: Amarillo Victoria con efecto neón sólido */
+.marquee-right { 
+    animation: marqueeRight 60s linear infinite; 
+    margin-bottom: 20px; 
+    color: #fcd700; 
+    text-shadow: 0 0 10px rgba(252, 215, 0, 0.4), 0 0 20px rgba(252, 215, 0, 0.2); 
+}
+
+/* Fila 2: Rojo Racing con efecto neón sólido */
+.marquee-left { 
+    animation: marqueeLeft 40s linear infinite; 
+    color: #cc0000; 
+    text-shadow: 0 0 10px rgba(204, 0, 0, 0.5), 0 0 20px rgba(204, 0, 0, 0.3); 
+}
+
+@keyframes marqueeRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0%); } }
+@keyframes marqueeLeft { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
+
+/* Contenedor central de los assets (Fotos y firma gigante) */
+.hero-main-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    
+    /* 🛡️ Importante: z-index superior para estar sobre el fondo marquee */
+    z-index: 10; 
+}
+
+/* LA TARJETA QUE SE ENCOGE */
+.foreground-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    
+    /* 🛡️ Nivel 2 del Hero */
+    z-index: 2; 
+    
+    background-color: #020408; 
+    background-image: 
+        radial-gradient(circle at 15% 15%, rgba(204, 0, 0, 0.15) 0%, transparent 40%), 
+        radial-gradient(circle at 85% 85%, rgba(252, 215, 0, 0.10) 0%, transparent 40%), 
+        radial-gradient(circle at 50% 50%, #0a1428 0%, #000000 80%); 
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; 
+    transform-origin: center center; 
+    will-change: transform;
+    overflow: hidden; 
+    box-shadow: 0px 0px 60px rgba(0,0,0,1);
+}
+
+/* DIMMER (Oscurece la tarjeta al bajar el scroll) */
+.card-dimmer {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    display: flex;
-    max-width: 1800px;
-    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.85); 
+    z-index: 10; 
+    opacity: 0; 
+    pointer-events: none;
 }
 
-/* --- LADO IZQUIERDO: GALERÍA PARALLAX --- */
-.menu-left {
-    width: 60%; /* Aumentamos el ancho para que se desplace a la izquierda */
-    height: 100%;
-    display: flex;
-    justify-content: flex-start; /* Alineamos a la izquierda */
-    align-items: center;
-    gap: 40px; 
-    overflow: hidden;
-    padding-left: 50px; /* Espacio desde el borde de la pantalla */
-}
+.image-container { position: relative; width: 750px; max-width: 95vw; display: flex; justify-content: center; -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 70%); mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 70%); z-index: 1; }
+.base-img { width: 100%; display: block; object-fit: cover; opacity: 0; transform: translateY(50px); }
+.blob-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+.helmet-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; clip-path: url(#blobClip); opacity: 0; transform: translateY(50px); object-fit: cover; pointer-events: none; }
+#blobPathVisual { fill: rgba(180, 180, 180, 0.20); backdrop-filter: blur(2px); }
 
-.img-column {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    height: 140vh;
-    justify-content: center;
-    will-change: transform;
-}
-
-/* Imágenes más grandes y cuadradas */
-.img-column img {
-    width: 380px;  /* 👈 Más anchas */
-    height: 380px; /* 👈 Altura igual al ancho para ser cuadradas */
-    object-fit: cover;
-    filter: grayscale(100%);
-    opacity: 0.5;
-    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-    border-radius: 4px; /* Un pequeño redondeo sutil */
-    pointer-events: none; /* 👈 LA CLAVE: El ratón ignorará las fotos físicamente */
-}
-
-/* Solo se activará por JavaScript */
-.img-column img.color-active {
-    filter: grayscale(0%); /* Vuelve el color */
-    opacity: 1;
-    transform: scale(1.05); /* Zoom elegante */
-    z-index: 10;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-}
-
-.img-column img:hover {
-    filter: grayscale(0%); /* Vuelve a color al pasar el cursor */
-    opacity: 1;
-}
-
-/* --- LADO DERECHO: TEXTOS --- */
-.menu-right {
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding-left: 20px;
-    z-index: 10; /* Asegura que el texto esté por encima si se cruzan */
-}
-
-.fullscreen-menu ul {
-    list-style: none;
-    text-align: left; /* Textos a la izquierda */
-}
-
-.fullscreen-menu li {
-    margin: 15px 0; /* Un poco menos de margen para que se vea como bloque */
-}
-
-.fullscreen-menu a {
-    display: inline-block; 
-    font-size: 75px; /* 👈 Letras mucho más grandes como en la ref */
-    font-weight: 900;
-    font-family: 'Montserrat', sans-serif;
-    text-transform: uppercase;
-    text-decoration: none;
-    line-height: 0.9;
-    font-size: 85px; /* Un poco más grandes */
-    
-    background: linear-gradient(to bottom, #cc0000 50%, #ffffff 50%);
-    background-size: 100% 200%;
-    background-position: 0% 100%; 
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    transition: background-position 0.3s ease-in-out;
-}
-
-.fullscreen-menu a:hover {
-    background-position: 0% 0%; 
-}
-
-/* --- ESTILOS DE LA PÁGINA ACTUAL (HOME Y SU RACHA) --- */
-.current-page {
-    display: inline-block; 
-    font-size: 85px; 
-    font-weight: 900;
-    font-family: 'Montserrat', sans-serif;
-    text-transform: uppercase;
-    color: #ffffff; 
-    position: relative;
-    cursor: default; /* Cursor normal, indica que no es botón */
-    line-height: 0.9;
-}
-
-.wavy-line {
+/* FIRMA GIGANTE */
+.signature-wrapper {
     position: absolute;
     top: 50%;
-    left: -5%; /* Hace que la línea empiece antes de la H */
-    width: 110%; /* Hace que la línea termine después de la E */
-    height: 30px;
-    transform: translateY(-50%);
-    pointer-events: none; /* Evita que la línea estorbe al ratón */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px; 
+    max-width: 120vw;
+    
+    /* 🛡️ POR ENCIMA de la tarjeta encogida */
+    z-index: 15; 
+    
+    pointer-events: none;
 }
+.signature-svg { width: 100%; height: auto; }
+.sig-path { filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 0.9)); }
 
-/* ===============================
-   CUADRO SIGUIENTE CARRERA & LÁSER RED BULL
-================================== */
+/* CUADRO DE LA CARRERA */
 .next-race-box {
-    position: fixed; 
-    top: 150px;
-    right: 50px;
+    position: absolute; 
+    top: 50%;
+    transform: translateY(-50%) translateX(30px);
+    right: 5%;
     width: 280px;
     background: rgba(12, 12, 12, 0.4); 
     backdrop-filter: blur(10px); 
@@ -396,127 +263,27 @@ body {
     color: #ffffff;
     font-family: 'Montserrat', sans-serif;
     opacity: 0; 
-    transform: translateX(30px);
 }
 
-.next-race-box .label {
-    font-size: 10px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.6);
-    letter-spacing: 2px;
-}
+.next-race-box .label { font-size: 10px; font-weight: 400; color: rgba(255, 255, 255, 0.6); letter-spacing: 2px; }
+.next-race-box .circuit-name { font-size: 16px; font-weight: 900; margin-top: 5px; margin-bottom: 15px; text-transform: uppercase; }
+.circuit-wrapper { width: 100%; height: 140px; display: flex; justify-content: center; align-items: center; margin: 15px 0; }
+.track-svg { width: 80%; height: 100%; }
 
-.next-race-box .circuit-name {
-    font-size: 16px;
-    font-weight: 900;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-}
-
-.circuit-wrapper {
-    width: 100%;
-    height: 140px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 15px 0;
-}
-
-.track-svg {
-    width: 80%;
-    height: 100%;
-}
-
-#track-path {
-    /* Forzamos que anule el fill="#000000" de tu código original */
-    fill: transparent !important; 
-    
-    /* Le aplicamos el degradado Red Bull */
-    stroke: url(#rbGradient) !important;
-    stroke-width: 4; 
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    
-    /* Longitud súper larga (6000) porque tu SVG tiene muchísimo detalle */
-    stroke-dasharray: 6000; 
-    stroke-dashoffset: 6000;
-    
-    /* Bucle infinito yendo y viniendo (8 segundos para apreciar el degradado) */
-    animation: drawTrack 3s ease-in-out infinite alternate; 
-}
-
+#track-path { fill: transparent !important; stroke: url(#rbGradient) !important; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 6000; stroke-dashoffset: 6000; animation: drawTrack 3s ease-in-out infinite alternate; }
 @keyframes drawTrack {
-    0% {
-        stroke-dashoffset: 6000;
-        fill: transparent !important;
-        stroke: url(#rbGradient) !important;
-        filter: drop-shadow(0px 0px 4px rgba(204, 0, 0, 0.5));
-    }
-    45% {
-        /* Termina de dibujar en degradado */
-        stroke-dashoffset: 0;
-        fill: transparent !important;
-        stroke: url(#rbGradient) !important;
-        filter: drop-shadow(0px 0px 5px rgba(252, 215, 0, 0.6));
-    }
-    60% {
-        /* SE ENCIENDE EN BLANCO Y CON SOMBRA/BRILLO */
-        stroke-dashoffset: 0;
-        fill: #ffffff !important;
-        stroke: #ffffff !important;
-        filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.8));
-    }
-    100% {
-        /* Se queda quieto, blanco y brillante antes de empezar a borrarse hacia atrás */
-        stroke-dashoffset: 0;
-        fill: #ffffff !important;
-        stroke: #ffffff !important;
-        filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.8));
-    }
+    0% { stroke-dashoffset: 6000; fill: transparent !important; stroke: url(#rbGradient) !important; filter: drop-shadow(0px 0px 4px rgba(204, 0, 0, 0.5)); }
+    45% { stroke-dashoffset: 0; fill: transparent !important; stroke: url(#rbGradient) !important; filter: drop-shadow(0px 0px 5px rgba(252, 215, 0, 0.6)); }
+    60% { stroke-dashoffset: 0; fill: #ffffff !important; stroke: #ffffff !important; filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.8)); }
+    100% { stroke-dashoffset: 0; fill: #ffffff !important; stroke: #ffffff !important; filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.8)); }
 }
 
-/* ===============================
-   FOOTER DEL TROFEO Y 4 CAMPEONATOS (Actualizado)
-================================== */
-.centered-stats {
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    margin-top: 15px;
-    padding-top: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
+.centered-stats { border-top: 1px solid rgba(255, 255, 255, 0.2); margin-top: 15px; padding-top: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+.trophy-wrapper { margin-bottom: 12px; }
+.trophy-svg { width: 45px; height: 45px; stroke: rgba(255, 255, 255, 0.8); filter: drop-shadow(0px 0px 4px rgba(255, 255, 255, 0.2)); }
+.champ-text { font-size: 15px; font-weight: 900; letter-spacing: 1px; color: #ffffff; margin-bottom: 6px; }
+.champ-text .highlight { color: #cc0000; font-size: 18px; }
+.champ-years { font-size: 11px; font-weight: 400; color: rgba(255, 255, 255, 0.5); letter-spacing: 3px; }
 
-.trophy-wrapper {
-    margin-bottom: 12px;
-}
-
-.trophy-svg {
-    width: 45px;
-    height: 45px;
-    stroke: rgba(255, 255, 255, 0.8);
-    filter: drop-shadow(0px 0px 4px rgba(255, 255, 255, 0.2)); 
-}
-
-.champ-text {
-    font-size: 15px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    color: #ffffff;
-    margin-bottom: 6px;
-}
-
-.champ-text .highlight {
-    color: #cc0000; 
-    font-size: 18px;
-}
-
-.champ-years {
-    font-size: 11px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.5);
-    letter-spacing: 3px;
-}
+/* SECCIÓN INFERIOR */
+.content-section { height: 150vh; background-color: #010204; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #ffffff; font-family: 'Montserrat', sans-serif; border-top: 1px solid rgba(255, 255, 255, 0.1); z-index: 5; position: relative; }
