@@ -354,13 +354,13 @@ body {
   line-height: 1;
 }
 .marquee-right {
-  animation: marqueeRight 60s linear infinite;
+  animation: marqueeRight 25s linear infinite;
   margin-bottom: 20px;
   color: #fcd700;
   text-shadow: 0 0 15px rgba(252, 215, 0, 0.5);
 }
 .marquee-left {
-  animation: marqueeLeft 40s linear infinite;
+  animation: marqueeLeft 15s linear infinite;
   color: #cc0000;
   text-shadow: 0 0 15px rgba(204, 0, 0, 0.6);
 }
@@ -614,13 +614,13 @@ body {
 .content-section {
   position: relative;
   z-index: 10;
-  min-height: 200vh;
+  min-height: 100vh;
   background-color: transparent;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 100px 20px 100vh;
+  padding: 100px 20px;
 }
 
 .quote-container {
@@ -675,6 +675,104 @@ body {
 .bg-blue { background-color: #0a1428; }
 .bg-red { background-color: #cc0000; }
 .bg-yellow { background-color: #fcd700; }
+
+/* ===============================
+   SECCIÓN 4: LÍNEA DE TIEMPO (HORIZONTAL)
+================================== */
+.history-section {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* Oculta lo que sale por la derecha */
+    background-color: #010204;
+    z-index: 10;
+}
+
+.history-track {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: max-content; /* 🪄 Magia: El ancho se adapta a su contenido */
+    padding: 0 15vw; /* Espacio al inicio y al final del scroll */
+    gap: 15vw; /* Distancia entre las fotos */
+}
+
+.history-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Alineaciones estilo Collage (Arriba, Abajo, Centro) */
+.top-align { align-self: flex-start; margin-top: 15vh; }
+.bottom-align { align-self: flex-end; margin-bottom: 15vh; }
+.center-align { align-self: center; }
+
+/* Tipografía y Bloques de Texto */
+.text-block {
+    width: 35vw;
+    min-width: 400px;
+}
+
+.history-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(35px, 4vw, 55px);
+    font-weight: 400;
+    color: #A7A9AC; /* Gris elegante */
+    line-height: 1.2;
+}
+
+.history-quote .white-text {
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+}
+
+.history-deco {
+    width: 150px;
+    margin-top: 20px;
+}
+
+/* Bloques de Imágenes */
+.img-block img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+    filter: grayscale(80%) brightness(0.8);
+    transition: all 0.5s ease;
+}
+
+.img-block:hover img {
+    filter: grayscale(0%) brightness(1);
+    transform: scale(1.02);
+}
+
+/* Tamaños variados de imágenes para el collage */
+.small-img { width: 20vw; min-width: 250px; }
+.medium-img { width: 30vw; min-width: 350px; }
+.large-img { width: 45vw; min-width: 500px; }
+
+.history-date {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 900;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Estilo para las descripciones de la historia */
+.history-desc {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.65); /* Gris claro semitransparente */
+    line-height: 1.6;
+    margin-top: 5px;
+    max-width: 90%; /* Evita que el texto llegue hasta el borde de la imagen */
+}
 
 /* ============================================================
    ESCUDO Y BOTÓN (ESTILOS ORIGINALES RESTAURADOS)
@@ -732,4 +830,86 @@ body {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+}
+
+/* ===============================
+   ESTILOS DE LA TABLA F1 (TELEMETRÍA)
+================================== */
+.table-block {
+    position: relative; /* Necesario para la animación de revelado */
+    overflow: hidden; /* 🪄 Atrapa la animación dentro de los bordes redondeados */
+    width: 45vw; /* Lo hacemos un poco más ancho para que quepan 4 columnas */
+    min-width: 550px;
+    background: rgba(10, 20, 40, 0.4); 
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 30px;
+}
+
+/* 🪄 Color verde para cuando supera al P2 */
+.positive-gap {
+    color: #00ff00 !important;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.f1-telemetry-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 10px;
+}
+
+.f1-telemetry-table th {
+    text-align: left;
+    padding: 12px 10px;
+    color: #fcd700; /* Amarillo Red Bull */
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.f1-telemetry-table td {
+    padding: 15px 10px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background-color 0.3s;
+}
+
+/* Efecto hover por fila para que parezca interactiva */
+.f1-telemetry-table tbody tr:hover td {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.points-gap {
+    color: #A7A9AC;
+    font-family: monospace; /* Fuente de números para que se alinien perfecto */
+    font-size: 16px !important;
+}
+
+/* La etiqueta de la carrera épica en Brasil */
+.badge-hero {
+    background-color: #cc0000; /* Rojo */
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 900;
+    padding: 3px 6px;
+    border-radius: 3px;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+/* Resaltado de la carrera final */
+.final-row td {
+    border-bottom: none; /* Quitamos la línea final */
+}
+
+.final-gap {
+    color: #cc0000; /* Resalta en rojo dramático */
+    font-weight: 900;
+    font-size: 22px !important;
+    text-shadow: 0 0 10px rgba(204, 0, 0, 0.4);
 }

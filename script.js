@@ -6,8 +6,8 @@ window.scrollTo(0, 0);
 
 // 1. INICIALIZAR LENIS (SMOOTH SCROLL GLOBAL)
 const lenis = new Lenis({
-    duration: 1.2, 
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true
 });
 
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
             scrollTrigger: {
                 trigger: ".hero-pin-wrapper",
                 start: "top top",
-                end: "+=2000",
+                end: "+=900",
                 scrub: 1,
                 pin: true,
             }
@@ -293,14 +293,61 @@ document.addEventListener("DOMContentLoaded", () => {
             gsap.to(cover, {
                 scrollTrigger: {
                     trigger: line,
-                    start: "top 80%", 
-                    toggleActions: "play none none reverse" 
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
                 },
-                scaleX: 0, 
-                duration: 0.8, 
+                scaleX: 0,
+                duration: 0.8,
                 ease: "power3.inOut",
                 delay: index * 0.15
             });
         });
     }
-});
+
+    // --- 6. SCROLL HORIZONTAL (HISTORIA DE MAX) ---
+    const historySection = document.querySelector('.history-section');
+    const historyTrack = document.querySelector('.history-track');
+
+    if (historySection && historyTrack) {
+        // Obtenemos cuánto espacio debe recorrer hacia la izquierda
+        function getScrollAmount() {
+            let trackWidth = historyTrack.scrollWidth;
+            return -(trackWidth - window.innerWidth);
+        }
+
+        // 🪄 Guardamos el movimiento horizontal en una variable
+        const horizontalTween = gsap.to(historyTrack, {
+            x: getScrollAmount,
+            ease: "none",
+            scrollTrigger: {
+                trigger: historySection,
+                start: "top top",
+                end: () => `+=${getScrollAmount() * -1}`,
+                pin: true,
+                scrub: 1,
+                invalidateOnRefresh: true
+            }
+        });
+
+        // 🪄 ANIMACIÓN DE REVELADO DE LA TABLA (Mismo efecto que la frase)
+        const tableCover = document.querySelector('.table-cover');
+
+        if (tableCover) {
+            // Forzamos el bloque rojo a estar 100% estirado tapando todo
+            gsap.set(tableCover, { scaleX: 1, transformOrigin: "right center" });
+
+            // Lo animamos para que se encoja a 0
+            gsap.to(tableCover, {
+                scaleX: 0,
+                duration: 0.8,
+                ease: "power3.inOut",
+                scrollTrigger: {
+                    trigger: ".table-block",
+                    containerAnimation: horizontalTween, // Magia pura: detecta su posición en el scroll horizontal
+                    start: "left 70%", // Se activa cuando la tabla entra al 70% de la pantalla por la derecha
+                    toggleActions: "play none none reverse" // Se vuelve a tapar si regresas el scroll
+                }
+            });
+        }
+    }
+}); // <-- Fin del document.addEventListener
