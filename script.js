@@ -64,13 +64,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const tl = gsap.timeline();
 
     // Entra el logo de Max original en el centro
-    tl.to(".logo", { duration: 1.2, opacity: 1, scale: 1, ease: "power2.out" })
-        .to(".logo", { duration: 0.8, opacity: 0, scale: 0.9, ease: "power2.in", delay: 0.8 })
-        .to("#preloader", { duration: 1.2, y: "-100%", ease: "power4.inOut" })
-        .to([".base-img", ".helmet-img"], { duration: 1.5, y: 0, opacity: 1, ease: "power3.out", stagger: 0 }, "-=0.8")
-        .to(".site-header", { duration: 1, y: 0, opacity: 1, ease: "power3.out" }, "-=1.2")
+    tl.to(".logo", { duration: 1.2, opacity: 1, scale: 1, ease: "power2.out", force3D: true })
+        .to(".logo", { duration: 0.8, opacity: 0, scale: 0.9, ease: "power2.in", delay: 0.8, force3D: true })
+        .to("#preloader", { duration: 1.2, y: "-100%", ease: "power4.inOut", force3D: true })
+        .to([".base-img", ".helmet-img"], { duration: 1.5, y: 0, opacity: 1, ease: "power3.out", stagger: 0, force3D: true }, "-=0.8")
+        .to(".site-header", { duration: 1, y: 0, opacity: 1, ease: "power3.out", force3D: true }, "-=1.2")
         // 🪄 AMBOS CUADROS ENTRAN JUNTOS
-        .to(".next-race-box, .team-info-box", { duration: 1, x: 0, opacity: 1, ease: "power3.out" }, "-=1");
+        .to(".next-race-box, .team-info-box", { duration: 1, x: 0, opacity: 1, ease: "power3.out", force3D: true }, "-=1");
 
     // --- 2. LÓGICA DE SCROLL ---
     const sigPath = document.querySelector('.sig-path');
@@ -83,7 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
             strokeDashoffset: sigLength,
             fill: "transparent",
             stroke: "#ffffff",
-            strokeWidth: 12
+            strokeWidth: 12,
+            force3D: true
         });
 
         const scrollTl = gsap.timeline({
@@ -99,13 +100,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // 🪄 AMBOS CUADROS SE DESVANECEN AL BAJAR
         scrollTl.fromTo(".next-race-box, .team-info-box",
             { autoAlpha: 1 },
-            { autoAlpha: 0, duration: 0.5 }, 0
+            { autoAlpha: 0, duration: 0.5, force3D: true }, 0
         );
 
-        scrollTl.to(".foreground-card", { scale: 0.45, borderRadius: "20px", ease: "power1.inOut", duration: 4 }, 0)
-            .to(".card-dimmer", { opacity: 0.85, duration: 4 }, 0)
-            .to(sigPath, { strokeDashoffset: 0, duration: 4, ease: "power1.inOut" }, 0)
-            .to(sigPath, { fill: "#ffffff", duration: 0.5 }, 4);
+        scrollTl.to(".foreground-card", { scale: 0.45, borderRadius: "20px", ease: "power1.inOut", duration: 4, force3D: true }, 0)
+            .to(".card-dimmer", { opacity: 0.85, duration: 4, force3D: true }, 0)
+            .to(sigPath, { strokeDashoffset: 0, duration: 4, ease: "power1.inOut", force3D: true }, 0)
+            .to(sigPath, { fill: "#ffffff", duration: 0.5, force3D: true }, 4);
     }
 
     // --- 3. LÓGICA DEL MENÚ ---
@@ -162,18 +163,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const ww = window.innerWidth;
         const wh = window.innerHeight;
         const dur = 0.7;
-        autoTl.set(blobData, { scale: 0, x: -200, y: wh * 0.15 })
-            .to(blobData, { scale: 1, duration: 0.6, ease: "power2.out" }, 0)
-            .to(blobData, { x: ww + 200, y: wh * 0.30, duration: dur, ease: "sine.inOut" }, 0)
-            .to(blobData, { x: -200, y: wh * 0.60, duration: dur, ease: "sine.inOut" })
-            .to(blobData, { x: ww + 200, y: wh * 0.90, duration: dur, ease: "sine.in" })
-            .to(blobData, { scale: 0, duration: 0.6, ease: "power2.in" }, "-=0.6")
+        autoTl.set(blobData, { scale: 0, x: -200, y: wh * 0.15, force3D: true })
+            .to(blobData, { scale: 1, duration: 0.6, ease: "power2.out", force3D: true }, 0)
+            .to(blobData, { x: ww + 200, y: wh * 0.30, duration: dur, ease: "sine.inOut", force3D: true }, 0)
+            .to(blobData, { x: -200, y: wh * 0.60, duration: dur, ease: "sine.inOut", force3D: true })
+            .to(blobData, { x: ww + 200, y: wh * 0.90, duration: dur, ease: "sine.in", force3D: true })
+            .to(blobData, { scale: 0, duration: 0.6, ease: "power2.in", force3D: true }, "-=0.6")
             .to({}, { duration: 0.5 })
-            .to(blobData, { scale: 1, duration: 0.6, ease: "power2.out" }, "+=0")
-            .to(blobData, { x: -200, y: wh * 0.60, duration: dur, ease: "sine.inOut" }, "<")
-            .to(blobData, { x: ww + 200, y: wh * 0.30, duration: dur, ease: "sine.inOut" })
-            .to(blobData, { x: -200, y: wh * 0.15, duration: dur, ease: "sine.in" })
-            .to(blobData, { scale: 0, duration: 0.6, ease: "power2.in" }, "-=0.6")
+            .to(blobData, { scale: 1, duration: 0.6, ease: "power2.out", force3D: true }, "+=0")
+            .to(blobData, { x: -200, y: wh * 0.60, duration: dur, ease: "sine.inOut", force3D: true }, "<")
+            .to(blobData, { x: ww + 200, y: wh * 0.30, duration: dur, ease: "sine.inOut", force3D: true })
+            .to(blobData, { x: -200, y: wh * 0.15, duration: dur, ease: "sine.in", force3D: true })
+            .to(blobData, { scale: 0, duration: 0.6, ease: "power2.in", force3D: true }, "-=0.6")
             .to({}, { duration: 0.5 });
     }
     buildAutoTimeline();
@@ -187,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!mouseActive) {
             mouseActive = true;
             autoTl.pause();
-            gsap.to(blobData, { scale: 1, duration: 0.5 });
+            gsap.to(blobData, { scale: 1, duration: 0.5, force3D: true });
         }
         mouseX = e.clientX;
         mouseY = e.clientY;
@@ -195,8 +196,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (fullscreenMenu.classList.contains('active') && col1 && col2) {
             const mouseYPos = (e.clientY / window.innerHeight) - 0.5;
             const moveAmount = 300;
-            gsap.to(col1, { y: mouseYPos * -moveAmount, duration: 1.5, ease: "power2.out" });
-            gsap.to(col2, { y: mouseYPos * moveAmount, duration: 1.5, ease: "power2.out" });
+            gsap.to(col1, { y: mouseYPos * -moveAmount, duration: 1.5, ease: "power2.out", force3D: true });
+            gsap.to(col2, { y: mouseYPos * moveAmount, duration: 1.5, ease: "power2.out", force3D: true });
         }
     });
 
@@ -288,7 +289,7 @@ document.addEventListener("DOMContentLoaded", () => {
         quoteLines.forEach((line, index) => {
             const cover = line.querySelector(".reveal-cover");
 
-            gsap.set(cover, { scaleX: 1, transformOrigin: "right center" });
+            gsap.set(cover, { scaleX: 1, transformOrigin: "right center", force3D: true });
 
             gsap.to(cover, {
                 scrollTrigger: {
@@ -299,7 +300,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 scaleX: 0,
                 duration: 0.8,
                 ease: "power3.inOut",
-                delay: index * 0.15
+                delay: index * 0.15,
+                force3D: true
             });
         });
     }
@@ -319,6 +321,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const horizontalTween = gsap.to(historyTrack, {
             x: getScrollAmount,
             ease: "none",
+            force3D: true,
             scrollTrigger: {
                 trigger: historySection,
                 start: "top top",
@@ -334,13 +337,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (tableCover) {
             // Forzamos el bloque rojo a estar 100% estirado tapando todo
-            gsap.set(tableCover, { scaleX: 1, transformOrigin: "right center" });
+            gsap.set(tableCover, { scaleX: 1, transformOrigin: "right center", force3D: true });
 
             // Lo animamos para que se encoja a 0
             gsap.to(tableCover, {
                 scaleX: 0,
                 duration: 0.8,
                 ease: "power3.inOut",
+                force3D: true,
                 scrollTrigger: {
                     trigger: ".table-block",
                     containerAnimation: horizontalTween, // Magia pura: detecta su posición en el scroll horizontal
@@ -394,13 +398,13 @@ document.addEventListener("DOMContentLoaded", () => {
         today.setHours(0, 0, 0, 0);
 
         // 👇 1. COMENTAMOS LA BÚSQUEDA AUTOMÁTICA POR FECHA 👇
-        // const nextRace = f1Calendar.find(race => {
-        //     const raceDate = new Date(race.date + "T00:00:00");
-        //     return raceDate >= today;
-        // });
+        const nextRace = f1Calendar.find(race => {
+            const raceDate = new Date(race.date + "T00:00:00");
+            return raceDate >= today;
+        });
 
         // 👇 2. AGREGAMOS ESTA LÍNEA PARA FORZAR EL CIRCUITO (MODIFICA EL NOMBRE AQUÍ) 👇
-        const nextRace = f1Calendar.find(race => race.svg === "miami.svg");
+        //const nextRace = f1Calendar.find(race => race.svg === "italia.svg");
 
         if (nextRace) {
             console.log(`✅ 3. Carrera detectada: ${nextRace.name}`);
