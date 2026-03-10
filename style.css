@@ -913,3 +913,15 @@ body {
     font-size: 22px !important;
     text-shadow: 0 0 10px rgba(204, 0, 0, 0.4);
 }
+
+/* --- CORRECCIÓN PARA EL BRILLO DE LOS CIRCUITOS --- */
+.circuit-wrapper {
+    /* Evita que el contenedor principal corte el brillo */
+    overflow: visible !important; 
+}
+
+.circuit-wrapper svg,
+.track-svg {
+    /* Permite que el SVG expanda sus sombras más allá de su límite matemático */
+    overflow: visible !important; 
+}

@@ -350,4 +350,86 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     }
+    // --- 7. AUTOMATIZACIÓN DE LA PRÓXIMA CARRERA (FORZADO) ---
+    const f1Calendar = [
+        { date: "2026-03-08", name: "GP de Australia", svg: "australia.svg", range: "6 - 8 de marzo" },
+        { date: "2026-03-15", name: "GP de China", svg: "china.svg", range: "13 - 15 de marzo" },
+        { date: "2026-03-29", name: "GP de Japón", svg: "japon.svg", range: "27 - 29 de marzo" },
+        { date: "2026-04-12", name: "GP de Baréin", svg: "bahrein.svg", range: "10 - 12 de abril" },
+        { date: "2026-04-19", name: "GP de Arabia Saudita", svg: "arabiasaudita.svg", range: "17 - 19 de abril" },
+        { date: "2026-05-03", name: "GP de Miami", svg: "miami.svg", range: "1 - 3 de mayo" },
+        { date: "2026-05-24", name: "GP de Canadá", svg: "canada.svg", range: "22 - 24 de mayo" },
+        { date: "2026-06-07", name: "GP de Mónaco", svg: "monaco.svg", range: "5 - 7 de junio" },
+        { date: "2026-06-14", name: "GP de Barcelona", svg: "barcelona.svg", range: "12 - 14 de junio" },
+        { date: "2026-06-28", name: "GP de Austria", svg: "austria.svg", range: "26 - 28 de junio" },
+        { date: "2026-07-05", name: "GP de Gran Bretaña", svg: "granbretaña.svg", range: "3 - 5 de julio" },
+        { date: "2026-07-19", name: "GP de Bélgica", svg: "belgica.svg", range: "17 - 19 de julio" },
+        { date: "2026-07-26", name: "GP de Hungría", svg: "hungria.svg", range: "24 - 26 de julio" },
+        { date: "2026-08-23", name: "GP de Países Bajos", svg: "paisesbajos.svg", range: "21 - 23 de agosto" },
+        { date: "2026-09-06", name: "GP de Italia", svg: "italia.svg", range: "4 - 6 de septiembre" },
+        { date: "2026-09-13", name: "GP de Madrid", svg: "madrid.svg", range: "11 - 13 de septiembre" },
+        { date: "2026-09-26", name: "GP de Azerbaiyán", svg: "azerbaiyan.svg", range: "24 - 26 de septiembre" },
+        { date: "2026-10-11", name: "GP de Singapur", svg: "singapur.svg", range: "9 - 11 de octubre" },
+        { date: "2026-10-25", name: "GP de Estados Unidos", svg: "estadosunidos.svg", range: "23 - 25 de octubre" },
+        { date: "2026-11-01", name: "GP de México", svg: "mexico.svg", range: "30 de oct - 1 de nov" },
+        { date: "2026-11-08", name: "GP de Brasil", svg: "brasil.svg", range: "6 - 8 de noviembre" },
+        { date: "2026-11-21", name: "GP de Las Vegas", svg: "lasvegas.svg", range: "19 - 21 de noviembre" },
+        { date: "2026-11-29", name: "GP de Qatar", svg: "qatar.svg", range: "27 - 29 de noviembre" },
+        { date: "2026-12-06", name: "GP de Abu Dabi", svg: "abudabi.svg", range: "4 - 6 de diciembre" }
+    ];
+
+    async function updateNextRace() {
+        console.log("🏁 1. Iniciando script de próxima carrera...");
+
+        const titleEl = document.getElementById('dynamic-race-name');
+        const datesEl = document.getElementById('dynamic-race-dates'); // 🪄 Capturamos el nuevo elemento de fechas
+        const container = document.getElementById('circuit-container');
+
+        if (!titleEl || !container) {
+            console.error("❌ 2. ERROR: No encuentro los contenedores en el HTML.");
+            return;
+        }
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        // 👇 1. COMENTAMOS LA BÚSQUEDA AUTOMÁTICA POR FECHA 👇
+        // const nextRace = f1Calendar.find(race => {
+        //     const raceDate = new Date(race.date + "T00:00:00");
+        //     return raceDate >= today;
+        // });
+
+        // 👇 2. AGREGAMOS ESTA LÍNEA PARA FORZAR EL CIRCUITO (MODIFICA EL NOMBRE AQUÍ) 👇
+        const nextRace = f1Calendar.find(race => race.svg === "miami.svg");
+
+        if (nextRace) {
+            console.log(`✅ 3. Carrera detectada: ${nextRace.name}`);
+
+            // 🪄 Actualizamos ambos textos en el HTML
+            titleEl.innerText = nextRace.name;
+            if (datesEl) datesEl.innerText = nextRace.range;
+
+            try {
+                console.log(`🔍 4. Buscando archivo: assets/circuits/${nextRace.svg}`);
+                const response = await fetch(`assets/circuits/${nextRace.svg}`);
+
+                if (response.ok) {
+                    const svgText = await response.text();
+                    container.innerHTML = svgText;
+                    console.log("🏎️ 5. ¡Circuito inyectado con éxito!");
+                } else {
+                    console.error(`⚠️ El archivo ${nextRace.svg} no se encontró. Revisa la carpeta.`);
+                    titleEl.innerText = `${nextRace.name} (Falta archivo)`;
+                }
+            } catch (error) {
+                console.error("❌ Error de Fetch.", error);
+            }
+        } else {
+            titleEl.innerText = "Temporada Finalizada";
+            if (datesEl) datesEl.innerText = ""; // Limpiamos la fecha si la temporada acabó
+        }
+    }
+
+    // 🔥 Ejecutamos la función directamente
+    updateNextRace();
 }); // <-- Fin del document.addEventListener
