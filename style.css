@@ -1134,26 +1134,42 @@ body {
   object-position: center bottom;
 
   filter: brightness(0.7) grayscale(20%);
-  
+
   /* 👇 ESTAS SON LAS LÍNEAS AGREGADAS PARA EL DIFUMINADO 👇 */
-  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 70%);
-  mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 70%);
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 1) 40%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  mask-image: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 1) 40%,
+    rgba(0, 0, 0, 0) 70%
+  );
 }
 
 /* 🪄 IMAGEN DERECHA: Igualada en ancho para que sean espejos perfectos */
 .max-right {
-    right: -2vw;
-    
-    /* 👇 Mismo ancho que la izquierda para simetría total */
-    width: 38vw; 
-    height: 115vh;
-    bottom: -10vh; 
-    
-    object-position: right bottom; 
+  right: -2vw;
 
-    filter: brightness(0.6) grayscale(20%); 
-    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 70%);
-    mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 70%);
+  /* 👇 Mismo ancho que la izquierda para simetría total */
+  width: 38vw;
+  height: 115vh;
+  bottom: -10vh;
+
+  object-position: right bottom;
+
+  filter: brightness(0.6) grayscale(20%);
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 1) 40%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  mask-image: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 1) 40%,
+    rgba(0, 0, 0, 0) 70%
+  );
 }
 
 /* RESPONSIVE: En pantallas más pequeñas, las imágenes se ocultan o se hacen más finas */
@@ -1161,4 +1177,218 @@ body {
   .max-bg-image {
     width: 25vw;
   }
+}
+
+/* ===============================
+   SECCIÓN 6: MERCH OFICIAL
+================================== */
+.merch-section {
+    position: relative;
+    min-height: 100vh;
+    background-color: #e5e5e0; /* Fondo gris cálido claro */
+    padding: 100px 5vw;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    z-index: 1; 
+}
+
+/* 👇 NUEVO FONDO: Ondas sinuosas que se mueven infinitamente 👇 */
+.merch-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; 
+    width: 100%; height: 100%;
+    /* Patrón SVG de ondas tileables */
+    background-image: url("data:image/svg+xml,%3Csvg width='1000' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 100 C 250 50, 250 150, 500 100 C 750 50, 750 150, 1000 100' fill='none' stroke='%231a1f2b' stroke-width='1.5' stroke-opacity='0.07'/%3E%3Cpath d='M 0 150 C 250 100, 250 200, 500 150 C 750 100, 750 200, 1000 150' fill='none' stroke='%231a1f2b' stroke-width='1.5' stroke-opacity='0.07'/%3E%3Cpath d='M 0 50 C 250 0, 250 100, 500 50 C 750 0, 750 100, 1000 50' fill='none' stroke='%231a1f2b' stroke-width='1.5' stroke-opacity='0.07'/%3E%3C/svg%3E");
+    background-size: 1000px 200px;
+    z-index: -1;
+    animation: merchWaves 20s linear infinite; /* Animación lenta y elegante */
+}
+
+@keyframes merchWaves {
+    from { background-position: 0 0; }
+    to { background-position: -1000px 0; }
+}
+
+.merch-container {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 40px;
+}
+
+/* --- Lado Izquierdo: Textos --- */
+.merch-text-box {
+    width: 45%; 
+    z-index: 2;
+}
+
+.merch-subtitle {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #555; /* Gris medio para el subtítulo */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.merch-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(50px, 6vw, 90px);
+    line-height: 0.9;
+    font-weight: 900;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    /* 👇 Nuevo color Premium: Dark Slate/Navy en lugar de Negro Puro */
+    color: #1a1f2b; 
+}
+
+.gold-text {
+    color: #fcd700;
+}
+
+.merch-description {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 40px;
+    max-width: 400px;
+}
+
+.merch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #cc0000;
+    color: white;
+    padding: 15px 30px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.merch-btn:hover {
+    background-color: #1a1f2b; /* Combina con el nuevo color del título al pasar el mouse */
+    color: #fcd700;
+    transform: translateY(-3px);
+}
+
+/* --- Lado Derecho: Collage de Imágenes --- */
+.merch-images-box {
+    width: 50%; 
+    height: 700px; 
+    position: relative;
+    z-index: 2;
+}
+
+.merch-img {
+    position: absolute;
+    object-fit: cover;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    opacity: 0; 
+    will-change: transform, opacity;
+}
+
+.merch-main {
+    width: 60%;
+    height: 80%;
+    top: 10%;
+    left: 20%;
+    z-index: 2;
+}
+
+.merch-sub-1 {
+    width: 45%;
+    height: 40%;
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.merch-sub-2 {
+    width: 40%;
+    height: 40%;
+    bottom: 5%;
+    left: 0;
+    z-index: 3;
+    border: 10px solid #e5e5e0;
+}
+
+.merch-floating-text {
+    position: absolute;
+    bottom: -20px;
+    right: 10%;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(80px, 8vw, 150px);
+    font-weight: 900;
+    color: #fcd700;
+    opacity: 0;
+    z-index: 4;
+    text-shadow: 4px 4px 0px #cc0000, 8px 8px 0px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 900px) {
+    .merch-container {
+        flex-direction: column;
+    }
+    .merch-images-box {
+        width: 100%;
+        height: 500px;
+    }
+    .merch-text-box {
+        width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* =========================================
+   MODO OSCURO PARA EL HEADER (COLORES PREMIUM MEJORADOS)
+============================================ */
+
+/* 1. Textos: Azul Slate Oscuro en lugar de negro puro */
+.header-dark-mode .brand-name span {
+    color: #1a1f2b !important;
+    transition: color 0.3s ease;
+}
+
+/* 2. Logo PNG: Lo apagamos y le damos una leve opacidad para que se funda elegante con el Slate */
+.header-dark-mode .center-logo img {
+    filter: brightness(0) opacity(0.85) !important;
+    transition: filter 0.3s ease;
+}
+
+/* 3. Botón Menú: Borde más sutil y sofisticado */
+.header-dark-mode .menu-btn {
+    border: 1px solid rgba(26, 31, 43, 0.4) !important; 
+    transition: border-color 0.3s ease;
+}
+
+/* 4. Botón Menú: Líneas internas */
+.header-dark-mode .menu-btn .line {
+    background-color: #1a1f2b !important;
+    transition: background-color 0.3s ease;
+}
+
+/* 5. SOLUCIÓN PARA LA "X" AL ABRIR EL MENÚ */
+.header-dark-mode .menu-btn.active {
+    border: 1px solid rgba(255, 255, 255, 0.5) !important; 
+}
+.header-dark-mode .menu-btn.active .line {
+    background-color: #ffffff !important; 
 }

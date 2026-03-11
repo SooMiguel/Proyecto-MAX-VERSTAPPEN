@@ -513,4 +513,38 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+
+    // --- 9. ANIMACIÓN SECCIÓN DE MERCH Y HEADER INVERTIDO ---
+    const merchSectionElem = document.querySelector('.merch-section');
+
+    if (merchSectionElem) {
+
+        // Animaciones del texto y collage
+        const tlMerch = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".merch-section",
+                start: "top 60%",
+                toggleActions: "play none none reverse"
+            }
+        });
+
+        tlMerch.from(".merch-text-box", { x: -100, opacity: 0, duration: 1, ease: "power3.out" })
+            .to(".merch-main", { y: 0, opacity: 1, duration: 1, ease: "power3.out" }, "-=0.5")
+            .fromTo(".merch-sub-1", { x: 50, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "back.out(1.2)" }, "-=0.6")
+            .fromTo(".merch-sub-2", { x: -50, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "back.out(1.2)" }, "-=0.6")
+            .fromTo(".merch-floating-text", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, "-=0.4");
+
+        // --- 10. GSAP CAMBIO DE COLOR DEL HEADER (.site-header) ---
+        const headerElement = document.querySelector('.site-header');
+        const merchSectionElem = document.querySelector('.merch-section');
+
+        if (headerElement && merchSectionElem) {
+            ScrollTrigger.create({
+                trigger: ".merch-section",
+                start: "top 80px", // Se activa cuando la sección llega casi arriba
+                end: "bottom 80px", // Se desactiva al salir
+                toggleClass: { targets: ".site-header", className: "header-dark-mode" }
+            });
+        }
+    }
 }); // <-- Fin del document.addEventListener
