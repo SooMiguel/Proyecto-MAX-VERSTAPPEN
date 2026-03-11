@@ -534,17 +534,91 @@ document.addEventListener("DOMContentLoaded", () => {
             .fromTo(".merch-sub-2", { x: -50, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "back.out(1.2)" }, "-=0.6")
             .fromTo(".merch-floating-text", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, "-=0.4");
 
-        // --- 10. GSAP CAMBIO DE COLOR DEL HEADER (.site-header) ---
-        const headerElement = document.querySelector('.site-header');
-        const merchSectionElem = document.querySelector('.merch-section');
 
-        if (headerElement && merchSectionElem) {
+        // --- 10. GSAP CAMBIO DE COLOR DEL HEADER PARA SECCIONES CLARAS ---
+        const headerElement = document.querySelector('.site-header');
+
+        if (headerElement) {
             ScrollTrigger.create({
-                trigger: ".merch-section",
-                start: "top 80px", // Se activa cuando la sección llega casi arriba
-                end: "bottom 80px", // Se desactiva al salir
+                trigger: ".merch-section",          // El color oscuro INICIA aquí
+                endTrigger: ".sponsors-section",    // El color oscuro TERMINA aquí
+                start: "top 80px",                  // Cuando Merch toca la parte de arriba
+                end: "bottom 80px",                 // Cuando Patrocinadores sale de la pantalla
                 toggleClass: { targets: ".site-header", className: "header-dark-mode" }
             });
         }
+    }
+
+    // --- 11. ANIMACIONES GSAP PARA SECCIÓN DE PARTNERS (LIGHT) ---
+    const sponsorsSectionElem = document.querySelector('.sponsors-section');
+
+    if (sponsorsSectionElem) {
+
+        // Animaciones del texto (Título, Subtítulo, Descripción)
+        const tlPartners = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".sponsors-section",
+                start: "top 60%", // Empieza la animación cuando la sección llega al 60% de la pantalla
+                toggleActions: "play none none reverse"
+            }
+        });
+
+        tlPartners.from(".sponsors-header-block *", {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2, // Aparecen uno tras otro
+            ease: "power3.out"
+        });
+
+        // 👇 INTEGRACIÓN CLAVE: Mantener el header fijo oscuro durante ambas secciones claras 👇
+        ScrollTrigger.create({
+            // El trigger es un "bloque" imaginario que cubre Merch + Partners
+            trigger: ".merch-section",
+            endTrigger: ".sponsors-section",
+            start: "top 80px", // Empieza cuando Merch toca arriba
+            end: "bottom 80px", // Termina cuando Partners sale por completo
+            toggleClass: { targets: ".site-header", className: "header-dark-mode" }
+        });
+    }
+
+    // --- 12. ANIMACIONES GSAP PARA EL FOOTER SUPREMO (CON RB2026 FANTASMA) ---
+    const footerElem = document.querySelector('.mv-footer');
+
+    if (footerElem) {
+        const tlFooter = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".mv-footer",
+                start: "top 85%", // Se activa cuando asoma un 15% del footer
+                toggleActions: "play none none reverse"
+            }
+        });
+
+        // 1. Revelar el contenido principal smoothly (Lema, Enlaces, Info)
+        tlFooter.fromTo(".footer-slogan",
+            { y: 50, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
+        )
+            .fromTo(".f-link",
+                { y: 20, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power2.out" }, "-=0.6"
+            )
+            .fromTo(".social-pill",
+                { scale: 0.8, opacity: 0 },
+                { scale: 1, opacity: 1, duration: 0.6, stagger: 0.1, ease: "back.out(1.5)" }, "-=0.4"
+            )
+            .fromTo(".f-info",
+                { x: 50, opacity: 0 },
+                { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, "-=0.6"
+            )
+            // 2. Revelar dramáticamente el AUTO de fondo
+            .fromTo(".footer-car-background",
+                { y: "15%", opacity: 0 },
+                { y: "0%", opacity: 1, duration: 2, ease: "power3.out" }, // opacity: 1 para color completo
+                "-=1.5"
+            )
+
+            // 3. La barra legal aparece al final
+            .fromTo(".footer-legal", { opacity: 0 }, { opacity: 1, duration: 1 }, "-=1");
     }
 }); // <-- Fin del document.addEventListener
