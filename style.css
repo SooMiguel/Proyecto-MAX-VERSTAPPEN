@@ -7,7 +7,8 @@
 /* ============================================================
    CONFIGURACIÓN LENIS (SMOOTH SCROLL GLOBAL)
 =============================================================== */
-html.lenis, html.lenis body {
+html.lenis,
+html.lenis body {
   height: auto;
 }
 .lenis.lenis-smooth {
@@ -320,8 +321,12 @@ body {
 }
 
 @keyframes moveWaves {
-  0% { background-position: 0 0; }
-  100% { background-position: 400px 80px; }
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 400px 80px;
+  }
 }
 
 /* ============================================================
@@ -372,12 +377,20 @@ body {
 }
 
 @keyframes marqueeRight {
-  0% { transform: translateX(-50%) translateZ(0); }
-  100% { transform: translateX(0%) translateZ(0); }
+  0% {
+    transform: translateX(-50%) translateZ(0);
+  }
+  100% {
+    transform: translateX(0%) translateZ(0);
+  }
 }
 @keyframes marqueeLeft {
-  0% { transform: translateX(0%) translateZ(0); }
-  100% { transform: translateX(-50%) translateZ(0); }
+  0% {
+    transform: translateX(0%) translateZ(0);
+  }
+  100% {
+    transform: translateX(-50%) translateZ(0);
+  }
 }
 
 .hero-main-content {
@@ -399,8 +412,16 @@ body {
   z-index: 2;
   background-color: #020408;
   background-image:
-    radial-gradient(circle at 15% 15%, rgba(204, 0, 0, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 85% 85%, rgba(252, 215, 0, 0.1) 0%, transparent 40%),
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(204, 0, 0, 0.15) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 85% 85%,
+      rgba(252, 215, 0, 0.1) 0%,
+      transparent 40%
+    ),
     radial-gradient(circle at 50% 50%, #0a1428 0%, #000000 80%);
   display: flex;
   justify-content: center;
@@ -433,8 +454,16 @@ body {
   max-width: 95vw;
   display: flex;
   justify-content: center;
-  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 70%);
-  mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 70%);
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 1) 40%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  mask-image: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 1) 40%,
+    rgba(0, 0, 0, 0) 70%
+  );
   z-index: 1;
 }
 .base-img {
@@ -497,22 +526,22 @@ body {
    CUADROS LATERALES (IZQUIERDA Y DERECHA)
 ================================== */
 .team-info-box {
-    position: absolute; 
-    top: 50%;
-    transform: translateY(-50%) translateX(-30px); 
-    left: 5%; 
-    width: 280px;
-    background: rgba(12, 12, 12, 0.4); 
-    backdrop-filter: blur(10px); 
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    padding: 20px;
-    z-index: 20; 
-    color: #ffffff;
-    font-family: 'Montserrat', sans-serif;
-    opacity: 0; 
-    /* 👇 OPTIMIZACIÓN AÑADIDA 👇 */
-    will-change: transform, opacity;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) translateX(-30px);
+  left: 5%;
+  width: 280px;
+  background: rgba(12, 12, 12, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  z-index: 20;
+  color: #ffffff;
+  font-family: "Montserrat", sans-serif;
+  opacity: 0;
+  /* 👇 OPTIMIZACIÓN AÑADIDA 👇 */
+  will-change: transform, opacity;
 }
 
 .next-race-box {
@@ -560,15 +589,15 @@ body {
   align-items: center;
   margin: 15px 0;
   /* 🪄 Corrección de Recorte + Optimización GPU */
-  overflow: visible !important; 
+  overflow: visible !important;
   will-change: transform, opacity, filter;
   transform: translateZ(0);
 }
 
 .circuit-wrapper svg,
 .track-svg {
-    /* Permite que el SVG expanda sus sombras más allá de su límite matemático */
-    overflow: visible !important; 
+  /* Permite que el SVG expanda sus sombras más allá de su límite matemático */
+  overflow: visible !important;
 }
 
 /* ESTILO DEL NUEVO LOGO SVG DE RED BULL */
@@ -589,10 +618,30 @@ body {
   animation: drawTrack 3s ease-in-out infinite alternate;
 }
 @keyframes drawTrack {
-  0% { stroke-dashoffset: 6000; fill: transparent !important; stroke: url(#rbGradient) !important; filter: drop-shadow(0px 0px 4px rgba(204, 0, 0, 0.5)); }
-  45% { stroke-dashoffset: 0; fill: transparent !important; stroke: url(#rbGradient) !important; filter: drop-shadow(0px 0px 5px rgba(252, 215, 0, 0.6)); }
-  60% { stroke-dashoffset: 0; fill: #ffffff !important; stroke: #ffffff !important; filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.8)); }
-  100% { stroke-dashoffset: 0; fill: #ffffff !important; stroke: #ffffff !important; filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.8)); }
+  0% {
+    stroke-dashoffset: 6000;
+    fill: transparent !important;
+    stroke: url(#rbGradient) !important;
+    filter: drop-shadow(0px 0px 4px rgba(204, 0, 0, 0.5));
+  }
+  45% {
+    stroke-dashoffset: 0;
+    fill: transparent !important;
+    stroke: url(#rbGradient) !important;
+    filter: drop-shadow(0px 0px 5px rgba(252, 215, 0, 0.6));
+  }
+  60% {
+    stroke-dashoffset: 0;
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
+    filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.8));
+  }
+  100% {
+    stroke-dashoffset: 0;
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
+    filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.8));
+  }
 }
 
 .centered-stats {
@@ -698,109 +747,132 @@ body {
   /* 👇 OPTIMIZACIÓN AÑADIDA 👇 */
   will-change: transform;
 }
-.bg-blue { background-color: #0a1428; }
-.bg-red { background-color: #cc0000; }
-.bg-yellow { background-color: #fcd700; }
+.bg-blue {
+  background-color: #0a1428;
+}
+.bg-red {
+  background-color: #cc0000;
+}
+.bg-yellow {
+  background-color: #fcd700;
+}
 
 /* ===============================
    SECCIÓN 4: LÍNEA DE TIEMPO (HORIZONTAL)
 ================================== */
 .history-section {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background-color: #010204;
-    z-index: 10;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #010204;
+  z-index: 10;
 }
 
 .history-track {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    width: max-content; 
-    padding: 0 15vw; 
-    gap: 15vw; 
-    /* 👇 OPTIMIZACIÓN AÑADIDA 👇 */
-    will-change: transform;
-    transform: translateZ(0);
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: max-content;
+  padding: 0 15vw;
+  gap: 15vw;
+  /* 👇 OPTIMIZACIÓN AÑADIDA 👇 */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .history-item {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 /* Alineaciones estilo Collage (Arriba, Abajo, Centro) */
-.top-align { align-self: flex-start; margin-top: 15vh; }
-.bottom-align { align-self: flex-end; margin-bottom: 15vh; }
-.center-align { align-self: center; }
+.top-align {
+  align-self: flex-start;
+  margin-top: 15vh;
+}
+.bottom-align {
+  align-self: flex-end;
+  margin-bottom: 15vh;
+}
+.center-align {
+  align-self: center;
+}
 
 /* Tipografía y Bloques de Texto */
 .text-block {
-    width: 35vw;
-    min-width: 400px;
+  width: 35vw;
+  min-width: 400px;
 }
 
 .history-quote {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(35px, 4vw, 55px);
-    font-weight: 400;
-    color: #A7A9AC; 
-    line-height: 1.2;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(35px, 4vw, 55px);
+  font-weight: 400;
+  color: #a7a9ac;
+  line-height: 1.2;
 }
 
 .history-quote .white-text {
-    color: #ffffff;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 900;
+  color: #ffffff;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
 }
 
 .history-deco {
-    width: 150px;
-    margin-top: 20px;
+  width: 150px;
+  margin-top: 20px;
 }
 
 /* Bloques de Imágenes */
 .img-block img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 4px;
-    filter: grayscale(80%) brightness(0.8);
-    transition: all 0.5s ease;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+  filter: grayscale(80%) brightness(0.8);
+  transition: all 0.5s ease;
 }
 
 .img-block:hover img {
-    filter: grayscale(0%) brightness(1);
-    transform: scale(1.02);
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.02);
 }
 
 /* Tamaños variados de imágenes para el collage */
-.small-img { width: 20vw; min-width: 250px; }
-.medium-img { width: 30vw; min-width: 350px; }
-.large-img { width: 45vw; min-width: 500px; }
+.small-img {
+  width: 20vw;
+  min-width: 250px;
+}
+.medium-img {
+  width: 30vw;
+  min-width: 350px;
+}
+.large-img {
+  width: 45vw;
+  min-width: 500px;
+}
 
 .history-date {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    font-weight: 900;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 /* Estilo para las descripciones de la historia */
 .history-desc {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.65); 
-    line-height: 1.6;
-    margin-top: 5px;
-    max-width: 90%; 
+  font-family: "Montserrat", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.6;
+  margin-top: 5px;
+  max-width: 90%;
 }
 
 /* ============================================================
@@ -818,127 +890,275 @@ body {
 }
 
 .back-to-top {
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
-    width: 55px;
-    height: 55px;
-    background-color: rgba(2, 4, 8, 0.6);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    color: #ffffff;
-    cursor: pointer;
-    z-index: 1900;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 55px;
+  height: 55px;
+  background-color: rgba(2, 4, 8, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #ffffff;
+  cursor: pointer;
+  z-index: 1900;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
 }
 
 .back-to-top svg {
-    width: 24px;
-    height: 24px;
-    transition: transform 0.3s ease;
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
 }
 
 .back-to-top:hover {
-    border-color: #cc0000;
-    background-color: rgba(20, 2, 2, 0.8);
+  border-color: #cc0000;
+  background-color: rgba(20, 2, 2, 0.8);
 }
 
 .back-to-top:hover svg {
-    transform: translateY(-4px);
-    color: #fcd700;
+  transform: translateY(-4px);
+  color: #fcd700;
 }
 
 .back-to-top.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 /* ===============================
    ESTILOS DE LA TABLA F1 (TELEMETRÍA)
 ================================== */
 .table-block {
-    position: relative; 
-    overflow: hidden; 
-    width: 45vw; 
-    min-width: 550px;
-    background: rgba(10, 20, 40, 0.4); 
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    padding: 30px;
+  position: relative;
+  overflow: hidden;
+  width: 45vw;
+  min-width: 550px;
+  background: rgba(10, 20, 40, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 30px;
 }
 
 /* 🪄 Color verde para cuando supera al P2 */
 .positive-gap {
-    color: #00ff00 !important;
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+  color: #00ff00 !important;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
 }
 
 .f1-telemetry-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: 'Montserrat', sans-serif;
-    margin-top: 10px;
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Montserrat", sans-serif;
+  margin-top: 10px;
 }
 
 .f1-telemetry-table th {
-    text-align: left;
-    padding: 12px 10px;
-    color: #fcd700; /* Amarillo Red Bull */
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  text-align: left;
+  padding: 12px 10px;
+  color: #fcd700; /* Amarillo Red Bull */
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .f1-telemetry-table td {
-    padding: 15px 10px;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 500;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    transition: background-color 0.3s;
+  padding: 15px 10px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background-color 0.3s;
 }
 
 /* Efecto hover por fila para que parezca interactiva */
 .f1-telemetry-table tbody tr:hover td {
-    background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .points-gap {
-    color: #A7A9AC;
-    font-family: monospace; 
-    font-size: 16px !important;
+  color: #a7a9ac;
+  font-family: monospace;
+  font-size: 16px !important;
 }
 
 /* La etiqueta de la carrera épica en Brasil */
 .badge-hero {
-    background-color: #cc0000; 
-    color: #ffffff;
-    font-size: 9px;
-    font-weight: 900;
-    padding: 3px 6px;
-    border-radius: 3px;
-    margin-left: 10px;
-    vertical-align: middle;
+  background-color: #cc0000;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 900;
+  padding: 3px 6px;
+  border-radius: 3px;
+  margin-left: 10px;
+  vertical-align: middle;
 }
 
 /* Resaltado de la carrera final */
 .final-row td {
-    border-bottom: none; 
+  border-bottom: none;
 }
 
 .final-gap {
-    color: #cc0000; 
-    font-weight: 900;
-    font-size: 22px !important;
-    text-shadow: 0 0 10px rgba(204, 0, 0, 0.4);
+  color: #cc0000;
+  font-weight: 900;
+  font-size: 22px !important;
+  text-shadow: 0 0 10px rgba(204, 0, 0, 0.4);
+}
+
+/* ===============================
+   SECCIÓN 5: MURO DE RÉCORDS
+================================== */
+.stats-section {
+  position: relative;
+  min-height: 100vh;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 5vw;
+  z-index: 10;
+  overflow: hidden; /* Atrapa las imágenes de Max */
+}
+
+/* Contenedores por encima de las imágenes */
+.stats-header,
+.stats-grid {
+  position: relative;
+  z-index: 10; /* Un z-index más alto que el de la imagen de fondo */
+  text-align: center;
+  width: 100%;
+}
+
+.stats-header {
+  margin-bottom: 80px;
+}
+
+.stats-title {
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(40px, 5vw, 80px);
+  font-weight: 900;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* ESTILO DEL NUEVO LOGO SVG DE RED BULL */
+.rb-svg {
+  width: 85%;
+  height: auto;
+  filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.2));
+}
+
+/* La cuadrícula de las tarjetas (ESTO FALTABA) */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+}
+
+/* Las tarjetas de cristal (ESTO FALTABA) */
+.stat-card {
+  background: rgba(10, 20, 40, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 50px 20px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+  will-change: transform, box-shadow;
+  transform: translateZ(0);
+}
+
+.stat-card:hover {
+  transform: translateY(-10px) translateZ(0);
+  box-shadow: 0 15px 30px rgba(204, 0, 0, 0.2);
+  border-color: rgba(204, 0, 0, 0.5);
+}
+
+.stat-number {
+  display: block;
+  font-family: "Montserrat", sans-serif;
+  font-size: 80px;
+  font-weight: 900;
+  color: #fcd700;
+  text-shadow: 0 0 20px rgba(252, 215, 0, 0.4);
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: "Playfair Display", serif;
+  font-size: 16px;
+  color: #a7a9ac;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* ===============================
+   ESTILOS PARA LAS IMÁGENES DE MAX SIMÉTRICAS
+================================== */
+.max-bg-image {
+  position: absolute;
+  pointer-events: none;
+  z-index: 5;
+  object-fit: cover;
+  will-change: transform, opacity;
+  opacity: 0;
+}
+
+/* 🪄 IMAGEN IZQUIERDA: Proporción restaurada y pegada al borde */
+.max-left {
+  /* 👇 Jalamos la imagen más a la izquierda para enterrar el espacio transparente fuera de la pantalla */
+  left: -4vw;
+
+  width: 45vw;
+  height: 115vh;
+  bottom: -10vh;
+
+  /* 👇 RESTAURADO: Esto es lo que mantenía a Max con el tamaño y zoom correctos */
+  object-position: center bottom;
+
+  filter: brightness(0.7) grayscale(20%);
+  
+  /* 👇 ESTAS SON LAS LÍNEAS AGREGADAS PARA EL DIFUMINADO 👇 */
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 70%);
+  mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 70%);
+}
+
+/* 🪄 IMAGEN DERECHA: Igualada en ancho para que sean espejos perfectos */
+.max-right {
+    right: -2vw;
+    
+    /* 👇 Mismo ancho que la izquierda para simetría total */
+    width: 38vw; 
+    height: 115vh;
+    bottom: -10vh; 
+    
+    object-position: right bottom; 
+
+    filter: brightness(0.6) grayscale(20%); 
+    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 70%);
+    mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 70%);
+}
+
+/* RESPONSIVE: En pantallas más pequeñas, las imágenes se ocultan o se hacen más finas */
+@media (max-width: 1024px) {
+  .max-bg-image {
+    width: 25vw;
+  }
 }

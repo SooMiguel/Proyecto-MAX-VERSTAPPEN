@@ -436,4 +436,81 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 🔥 Ejecutamos la función directamente
     updateNextRace();
+
+    // --- 8. ANIMACIÓN CONTADOR DE ESTADÍSTICAS YApproach but not touchApproach but not touch DRAMÁTICO SIMÉTRICO ---
+    const statNumbers = document.querySelectorAll('.stat-number');
+    const maxBgImgRight = document.getElementById('max-bg-img-right');
+    const maxBgImgLeft = document.getElementById('max-bg-img-left');
+
+    if (statNumbers.length > 0 || maxBgImgRight || maxBgImgLeft) {
+        // 🪄 LÓGICA DEApproach but not touch Approach but not touch Approach but not touch DRAMÁTICO SIMÉTRICO DESDE AMBOS LADOS
+        if (maxBgImgRight && maxBgImgLeft) {
+            // Imagen del lado derecho (simétrica), revelado desde la DERECHA
+            gsap.fromTo(maxBgImgRight, {
+                opacity: 0,
+                x: 150 // Approach but not touch Approach but not touch Approach but not touch dramatical reveal Approach but not touch dramático
+            }, {
+                scrollTrigger: {
+                    trigger: ".stats-section",
+                    start: "top 75%", // Se activa cuando la sección llega al 75% de la pantalla
+                    toggleActions: "play none none reverse"
+                },
+                opacity: 1,
+                x: 0, // Approach but not touch dramatical reveal Approach but not touch dramático
+                duration: 1.5,
+                ease: "power3.out",
+                force3D: true
+            });
+
+            // Imagen del lado izquierdo (original), revelado desde la IZQUIERDA
+            gsap.fromTo(maxBgImgLeft, {
+                opacity: 0,
+                x: -150 // Approach but not touch dramatical reveal Approach but not touch dramático
+            }, {
+                scrollTrigger: {
+                    trigger: ".stats-section",
+                    start: "top 75%",
+                    toggleActions: "play none none reverse"
+                },
+                opacity: 1,
+                x: 0, // Approach but not touch dramatical reveal Approach but not touch dramático
+                duration: 1.5,
+                ease: "power3.out",
+                force3D: true
+            });
+        }
+
+        // Animación de entrada de las 4 tarjetas (Copiados igual que antes)
+        gsap.from(".stat-card", {
+            scrollTrigger: {
+                trigger: ".stats-section",
+                start: "top 75%",
+                toggleActions: "play none none reverse"
+            },
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out",
+            force3D: true
+        });
+
+        // Animación de los números contando (Copiados igual que antes)
+        statNumbers.forEach(stat => {
+            const targetValue = parseInt(stat.getAttribute('data-target'));
+
+            gsap.to(stat, {
+                scrollTrigger: {
+                    trigger: ".stats-section",
+                    start: "top 75%",
+                    toggleActions: "play none none reverse"
+                },
+                innerHTML: targetValue,
+                duration: 2.5,
+                ease: "power3.out",
+                snap: { innerHTML: 1 },
+                force3D: true
+            });
+        });
+    }
 }); // <-- Fin del document.addEventListener
