@@ -332,61 +332,43 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // 🪄 ANIMACIÓN DE REVELADO DE LA TABLA (Mismo efecto que la frase)
-        const tableCover = document.querySelector('.table-cover');
-
-        if (tableCover) {
-            // Forzamos el bloque rojo a estar 100% estirado tapando todo
-            gsap.set(tableCover, { scaleX: 1, transformOrigin: "right center", force3D: true });
-
-            // Lo animamos para que se encoja a 0
-            gsap.to(tableCover, {
-                scaleX: 0,
-                duration: 0.8,
-                ease: "power3.inOut",
-                force3D: true,
-                scrollTrigger: {
-                    trigger: ".table-block",
-                    containerAnimation: horizontalTween, // Magia pura: detecta su posición en el scroll horizontal
-                    start: "left 70%", // Se activa cuando la tabla entra al 70% de la pantalla por la derecha
-                    toggleActions: "play none none reverse" // Se vuelve a tapar si regresas el scroll
-                }
-            });
-        }
+        // (Animación de la tabla eliminada)
     }
+
     // --- 7. AUTOMATIZACIÓN DE LA PRÓXIMA CARRERA (FORZADO) ---
     const f1Calendar = [
-        { date: "2026-03-08", name: "GP de Australia", svg: "australia.svg", range: "6 - 8 de marzo" },
-        { date: "2026-03-15", name: "GP de China", svg: "china.svg", range: "13 - 15 de marzo" },
-        { date: "2026-03-29", name: "GP de Japón", svg: "japon.svg", range: "27 - 29 de marzo" },
-        { date: "2026-04-12", name: "GP de Baréin", svg: "bahrein.svg", range: "10 - 12 de abril" },
-        { date: "2026-04-19", name: "GP de Arabia Saudita", svg: "arabiasaudita.svg", range: "17 - 19 de abril" },
-        { date: "2026-05-03", name: "GP de Miami", svg: "miami.svg", range: "1 - 3 de mayo" },
-        { date: "2026-05-24", name: "GP de Canadá", svg: "canada.svg", range: "22 - 24 de mayo" },
-        { date: "2026-06-07", name: "GP de Mónaco", svg: "monaco.svg", range: "5 - 7 de junio" },
-        { date: "2026-06-14", name: "GP de Barcelona", svg: "barcelona.svg", range: "12 - 14 de junio" },
-        { date: "2026-06-28", name: "GP de Austria", svg: "austria.svg", range: "26 - 28 de junio" },
-        { date: "2026-07-05", name: "GP de Gran Bretaña", svg: "granbretaña.svg", range: "3 - 5 de julio" },
-        { date: "2026-07-19", name: "GP de Bélgica", svg: "belgica.svg", range: "17 - 19 de julio" },
-        { date: "2026-07-26", name: "GP de Hungría", svg: "hungria.svg", range: "24 - 26 de julio" },
-        { date: "2026-08-23", name: "GP de Países Bajos", svg: "paisesbajos.svg", range: "21 - 23 de agosto" },
-        { date: "2026-09-06", name: "GP de Italia", svg: "italia.svg", range: "4 - 6 de septiembre" },
-        { date: "2026-09-13", name: "GP de Madrid", svg: "madrid.svg", range: "11 - 13 de septiembre" },
-        { date: "2026-09-26", name: "GP de Azerbaiyán", svg: "azerbaiyan.svg", range: "24 - 26 de septiembre" },
-        { date: "2026-10-11", name: "GP de Singapur", svg: "singapur.svg", range: "9 - 11 de octubre" },
-        { date: "2026-10-25", name: "GP de Estados Unidos", svg: "estadosunidos.svg", range: "23 - 25 de octubre" },
-        { date: "2026-11-01", name: "GP de México", svg: "mexico.svg", range: "30 de oct - 1 de nov" },
-        { date: "2026-11-08", name: "GP de Brasil", svg: "brasil.svg", range: "6 - 8 de noviembre" },
-        { date: "2026-11-21", name: "GP de Las Vegas", svg: "lasvegas.svg", range: "19 - 21 de noviembre" },
-        { date: "2026-11-29", name: "GP de Qatar", svg: "qatar.svg", range: "27 - 29 de noviembre" },
-        { date: "2026-12-06", name: "GP de Abu Dabi", svg: "abudabi.svg", range: "4 - 6 de diciembre" }
+        { date: "2026-03-08", name: "GP de Australia", svg: "australia.svg", range: "6 - 8 de marzo", country: "au" },
+        { date: "2026-03-15", name: "GP de China", svg: "china.svg", range: "13 - 15 de marzo", country: "cn" },
+        { date: "2026-03-29", name: "GP de Japón", svg: "japon.svg", range: "27 - 29 de marzo", country: "jp" },
+        { date: "2026-04-12", name: "GP de Baréin", svg: "bahrein.svg", range: "10 - 12 de abril", country: "bh" },
+        { date: "2026-04-19", name: "GP de Arabia Saudita", svg: "arabiasaudita.svg", range: "17 - 19 de abril", country: "sa" },
+        { date: "2026-05-03", name: "GP de Miami", svg: "miami.svg", range: "1 - 3 de mayo", country: "us" },
+        { date: "2026-05-24", name: "GP de Canadá", svg: "canada.svg", range: "22 - 24 de mayo", country: "ca" },
+        { date: "2026-06-07", name: "GP de Mónaco", svg: "monaco.svg", range: "5 - 7 de junio", country: "mc" },
+        { date: "2026-06-14", name: "GP de Barcelona", svg: "barcelona.svg", range: "12 - 14 de junio", country: "es" },
+        { date: "2026-06-28", name: "GP de Austria", svg: "austria.svg", range: "26 - 28 de junio", country: "at" },
+        { date: "2026-07-05", name: "GP de Gran Bretaña", svg: "granbretaña.svg", range: "3 - 5 de julio", country: "gb" },
+        { date: "2026-07-19", name: "GP de Bélgica", svg: "belgica.svg", range: "17 - 19 de julio", country: "be" },
+        { date: "2026-07-26", name: "GP de Hungría", svg: "hungria.svg", range: "24 - 26 de julio", country: "hu" },
+        { date: "2026-08-23", name: "GP de Países Bajos", svg: "paisesbajos.svg", range: "21 - 23 de agosto", country: "nl" },
+        { date: "2026-09-06", name: "GP de Italia", svg: "italia.svg", range: "4 - 6 de septiembre", country: "it" },
+        { date: "2026-09-13", name: "GP de Madrid", svg: "madrid.svg", range: "11 - 13 de septiembre", country: "es" },
+        { date: "2026-09-26", name: "GP de Azerbaiyán", svg: "azerbaiyan.svg", range: "24 - 26 de septiembre", country: "az" },
+        { date: "2026-10-11", name: "GP de Singapur", svg: "singapur.svg", range: "9 - 11 de octubre", country: "sg" },
+        { date: "2026-10-25", name: "GP de Estados Unidos", svg: "estadosunidos.svg", range: "23 - 25 de octubre", country: "us" },
+        { date: "2026-11-01", name: "GP de México", svg: "mexico.svg", range: "30 de oct - 1 de nov", country: "mx" },
+        { date: "2026-11-08", name: "GP de Brasil", svg: "brasil.svg", range: "6 - 8 de noviembre", country: "br" },
+        { date: "2026-11-21", name: "GP de Las Vegas", svg: "lasvegas.svg", range: "19 - 21 de noviembre", country: "us" },
+        { date: "2026-11-29", name: "GP de Qatar", svg: "qatar.svg", range: "27 - 29 de noviembre", country: "qa" },
+        { date: "2026-12-06", name: "GP de Abu Dabi", svg: "abudabi.svg", range: "4 - 6 de diciembre", country: "ae" }
     ];
 
     async function updateNextRace() {
         console.log("🏁 1. Iniciando script de próxima carrera...");
 
         const titleEl = document.getElementById('dynamic-race-name');
-        const datesEl = document.getElementById('dynamic-race-dates'); // 🪄 Capturamos el nuevo elemento de fechas
+        const datesEl = document.getElementById('dynamic-race-dates');
+        const flagEl = document.getElementById('dynamic-race-flag'); // 🪄 Capturamos la bandera
         const container = document.getElementById('circuit-container');
 
         if (!titleEl || !container) {
@@ -397,21 +379,22 @@ document.addEventListener("DOMContentLoaded", () => {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        // 👇 1. COMENTAMOS LA BÚSQUEDA AUTOMÁTICA POR FECHA 👇
         const nextRace = f1Calendar.find(race => {
             const raceDate = new Date(race.date + "T00:00:00");
             return raceDate >= today;
         });
 
-        // 👇 2. AGREGAMOS ESTA LÍNEA PARA FORZAR EL CIRCUITO (MODIFICA EL NOMBRE AQUÍ) 👇
-        //const nextRace = f1Calendar.find(race => race.svg === "italia.svg");
-
         if (nextRace) {
             console.log(`✅ 3. Carrera detectada: ${nextRace.name}`);
 
-            // 🪄 Actualizamos ambos textos en el HTML
             titleEl.innerText = nextRace.name;
             if (datesEl) datesEl.innerText = nextRace.range;
+
+            // 👇 Le pasamos el país a la API de banderas y la mostramos 👇
+            if (flagEl && nextRace.country) {
+                flagEl.src = `https://flagcdn.com/w40/${nextRace.country}.png`;
+                flagEl.style.display = "block";
+            }
 
             try {
                 console.log(`🔍 4. Buscando archivo: assets/circuits/${nextRace.svg}`);
@@ -430,72 +413,61 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         } else {
             titleEl.innerText = "Temporada Finalizada";
-            if (datesEl) datesEl.innerText = ""; // Limpiamos la fecha si la temporada acabó
+            if (datesEl) datesEl.innerText = "";
+            if (flagEl) flagEl.style.display = "none";
         }
     }
 
-    // 🔥 Ejecutamos la función directamente
     updateNextRace();
 
-    // --- 8. ANIMACIÓN CONTADOR DE ESTADÍSTICAS YApproach but not touchApproach but not touch DRAMÁTICO SIMÉTRICO ---
-    const statNumbers = document.querySelectorAll('.stat-number');
+    // --- 8. ANIMACIÓN Y API F1 PARA EL MURO DE RÉCORDS ---
     const maxBgImgRight = document.getElementById('max-bg-img-right');
     const maxBgImgLeft = document.getElementById('max-bg-img-left');
 
-    if (statNumbers.length > 0 || maxBgImgRight || maxBgImgLeft) {
-        // 🪄 LÓGICA DEApproach but not touch Approach but not touch Approach but not touch DRAMÁTICO SIMÉTRICO DESDE AMBOS LADOS
-        if (maxBgImgRight && maxBgImgLeft) {
-            // Imagen del lado derecho (simétrica), revelado desde la DERECHA
-            gsap.fromTo(maxBgImgRight, {
-                opacity: 0,
-                x: 150 // Approach but not touch Approach but not touch Approach but not touch dramatical reveal Approach but not touch dramático
-            }, {
-                scrollTrigger: {
-                    trigger: ".stats-section",
-                    start: "top 75%", // Se activa cuando la sección llega al 75% de la pantalla
-                    toggleActions: "play none none reverse"
-                },
-                opacity: 1,
-                x: 0, // Approach but not touch dramatical reveal Approach but not touch dramático
-                duration: 1.5,
-                ease: "power3.out",
-                force3D: true
-            });
-
-            // Imagen del lado izquierdo (original), revelado desde la IZQUIERDA
-            gsap.fromTo(maxBgImgLeft, {
-                opacity: 0,
-                x: -150 // Approach but not touch dramatical reveal Approach but not touch dramático
-            }, {
-                scrollTrigger: {
-                    trigger: ".stats-section",
-                    start: "top 75%",
-                    toggleActions: "play none none reverse"
-                },
-                opacity: 1,
-                x: 0, // Approach but not touch dramatical reveal Approach but not touch dramático
-                duration: 1.5,
-                ease: "power3.out",
-                force3D: true
-            });
-        }
-
-        // Animación de entrada de las 4 tarjetas (Copiados igual que antes)
-        gsap.from(".stat-card", {
-            scrollTrigger: {
-                trigger: ".stats-section",
-                start: "top 75%",
-                toggleActions: "play none none reverse"
-            },
-            y: 50,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.2,
-            ease: "power3.out",
-            force3D: true
+    if (maxBgImgRight && maxBgImgLeft) {
+        gsap.fromTo(maxBgImgRight, { opacity: 0, x: 150 }, {
+            scrollTrigger: { trigger: ".stats-section", start: "top 75%", toggleActions: "play none none reverse" },
+            opacity: 1, x: 0, duration: 1.5, ease: "power3.out", force3D: true
         });
 
-        // Animación de los números contando (Copiados igual que antes)
+        gsap.fromTo(maxBgImgLeft, { opacity: 0, x: -150 }, {
+            scrollTrigger: { trigger: ".stats-section", start: "top 75%", toggleActions: "play none none reverse" },
+            opacity: 1, x: 0, duration: 1.5, ease: "power3.out", force3D: true
+        });
+    }
+
+    gsap.from(".stat-card", {
+        scrollTrigger: { trigger: ".stats-section", start: "top 75%", toggleActions: "play none none reverse" },
+        y: 50, opacity: 0, duration: 1, stagger: 0.2, ease: "power3.out", force3D: true
+    });
+
+    async function loadLiveF1Stats() {
+        try {
+            const [winsRes, polesRes, pod2Res, pod3Res] = await Promise.all([
+                fetch('https://api.jolpi.ca/ergast/f1/drivers/max_verstappen/results/1.json?limit=1'),
+                fetch('https://api.jolpi.ca/ergast/f1/drivers/max_verstappen/grid/1/results.json?limit=1'),
+                fetch('https://api.jolpi.ca/ergast/f1/drivers/max_verstappen/results/2.json?limit=1'),
+                fetch('https://api.jolpi.ca/ergast/f1/drivers/max_verstappen/results/3.json?limit=1')
+            ]);
+
+            const winsData = await winsRes.json();
+            const polesData = await polesRes.json();
+            const pod2Data = await pod2Res.json();
+            const pod3Data = await pod3Res.json();
+
+            const totalWins = parseInt(winsData.MRData.total);
+            const totalPoles = parseInt(polesData.MRData.total);
+            const totalPodiums = totalWins + parseInt(pod2Data.MRData.total) + parseInt(pod3Data.MRData.total);
+
+            document.getElementById('api-wins').setAttribute('data-target', totalWins);
+            document.getElementById('api-poles').setAttribute('data-target', totalPoles);
+            document.getElementById('api-podiums').setAttribute('data-target', totalPodiums);
+
+        } catch (error) {
+            console.warn("Modo Offline: Usando estadísticas por defecto.", error);
+        }
+
+        const statNumbers = document.querySelectorAll('.stat-number');
         statNumbers.forEach(stat => {
             const targetValue = parseInt(stat.getAttribute('data-target'));
 
@@ -514,12 +486,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    loadLiveF1Stats();
+
     // --- 9. ANIMACIÓN SECCIÓN DE MERCH Y HEADER INVERTIDO ---
     const merchSectionElem = document.querySelector('.merch-section');
 
     if (merchSectionElem) {
-
-        // Animaciones del texto y collage
         const tlMerch = gsap.timeline({
             scrollTrigger: {
                 trigger: ".merch-section",
@@ -533,7 +505,6 @@ document.addEventListener("DOMContentLoaded", () => {
             .fromTo(".merch-sub-1", { x: 50, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "back.out(1.2)" }, "-=0.6")
             .fromTo(".merch-sub-2", { x: -50, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "back.out(1.2)" }, "-=0.6")
             .fromTo(".merch-floating-text", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, "-=0.4");
-
 
         // --- 10. GSAP CAMBIO DE COLOR DEL HEADER PARA SECCIONES CLARAS ---
         const headerElement = document.querySelector('.site-header');
@@ -554,11 +525,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (sponsorsSectionElem) {
 
-        // Animaciones del texto (Título, Subtítulo, Descripción)
         const tlPartners = gsap.timeline({
             scrollTrigger: {
                 trigger: ".sponsors-section",
-                start: "top 60%", // Empieza la animación cuando la sección llega al 60% de la pantalla
+                start: "top 60%",
                 toggleActions: "play none none reverse"
             }
         });
@@ -567,17 +537,15 @@ document.addEventListener("DOMContentLoaded", () => {
             y: 50,
             opacity: 0,
             duration: 1,
-            stagger: 0.2, // Aparecen uno tras otro
+            stagger: 0.2,
             ease: "power3.out"
         });
 
-        // 👇 INTEGRACIÓN CLAVE: Mantener el header fijo oscuro durante ambas secciones claras 👇
         ScrollTrigger.create({
-            // El trigger es un "bloque" imaginario que cubre Merch + Partners
             trigger: ".merch-section",
             endTrigger: ".sponsors-section",
-            start: "top 80px", // Empieza cuando Merch toca arriba
-            end: "bottom 80px", // Termina cuando Partners sale por completo
+            start: "top 80px",
+            end: "bottom 80px",
             toggleClass: { targets: ".site-header", className: "header-dark-mode" }
         });
     }
@@ -589,12 +557,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const tlFooter = gsap.timeline({
             scrollTrigger: {
                 trigger: ".mv-footer",
-                start: "top 85%", // Se activa cuando asoma un 15% del footer
+                start: "top 85%",
                 toggleActions: "play none none reverse"
             }
         });
 
-        // 1. Revelar el contenido principal smoothly (Lema, Enlaces, Info)
         tlFooter.fromTo(".footer-slogan",
             { y: 50, opacity: 0 },
             { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
@@ -611,14 +578,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 { x: 50, opacity: 0 },
                 { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, "-=0.6"
             )
-            // 2. Revelar dramáticamente el AUTO de fondo
             .fromTo(".footer-car-background",
                 { y: "15%", opacity: 0 },
-                { y: "0%", opacity: 1, duration: 2, ease: "power3.out" }, // opacity: 1 para color completo
+                { y: "0%", opacity: 1, duration: 2, ease: "power3.out" },
                 "-=1.5"
             )
-
-            // 3. La barra legal aparece al final
             .fromTo(".footer-legal", { opacity: 0 }, { opacity: 1, duration: 1 }, "-=1");
     }
-}); // <-- Fin del document.addEventListener
+});

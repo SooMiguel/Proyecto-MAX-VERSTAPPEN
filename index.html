@@ -45,7 +45,7 @@
                 <div class="img-column col-2">
                     <img src="assets/images/menu-3.jpg" alt="Max 3" id="img-3">
                     <img src="assets/images/menu-1.jpg" alt="Max 4" id="img-4">
-                </div>images/
+                </div>
             </div>
             <div class="menu-right">
                 <ul>
@@ -180,7 +180,10 @@
                 <aside class="next-race-box">
                     <div class="race-header">
                         <span class="label">PRÓXIMA CARRERA</span>
-                        <h4 class="circuit-name" id="dynamic-race-name">Cargando...</h4>
+                        <div class="title-with-flag">
+                            <img id="dynamic-race-flag" src="" alt="Bandera" style="display: none;">
+                            <h4 class="circuit-name" id="dynamic-race-name">Cargando...</h4>
+                        </div>
                         <p id="dynamic-race-dates"
                             style="color: #A7A9AC; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-top: 5px; letter-spacing: 1px;">
                         </p>
@@ -299,71 +302,6 @@
                     Mejor Piloto de 2025 por los jefes de equipo y sus propios rivales, demostrando que su grandeza va
                     más allá de los trofeos.</p>
             </div>
-
-            <div class="history-item table-block center-align">
-                <div class="reveal-cover bg-red table-cover"></div>
-
-                <span class="history-date" style="margin-bottom: 10px; position:relative; z-index: 10;">TRACKING DE LA
-                    REMONTADA 2025</span>
-                <table class="f1-telemetry-table" style="position:relative; z-index: 10;">
-                    <thead>
-                        <tr>
-                            <th>GRAN PREMIO</th>
-                            <th>RES. MAX</th>
-                            <th>VS NORRIS</th>
-                            <th>VS PIASTRI</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Países Bajos (El fondo)</td>
-                            <td>P2</td>
-                            <td class="points-gap">-70 pts</td>
-                            <td class="points-gap">-104 pts</td>
-                        </tr>
-                        <tr>
-                            <td>Estados Unidos</td>
-                            <td>P1</td>
-                            <td class="points-gap">-26 pts</td>
-                            <td class="points-gap">-40 pts</td>
-                        </tr>
-                        <tr>
-                            <td>México</td>
-                            <td>P3</td>
-                            <td class="points-gap">-36 pts</td>
-                            <td class="points-gap">-35 pts</td>
-                        </tr>
-                        <tr>
-                            <td>Brasil <span class="badge-hero">PITLANE TO P3</span></td>
-                            <td>P3</td>
-                            <td class="points-gap">-49 pts</td>
-                            <td class="points-gap">-25 pts</td>
-                        </tr>
-                        <tr>
-                            <td>Las Vegas</td>
-                            <td>P1</td>
-                            <td class="points-gap">-24 pts</td>
-                            <td class="points-gap">Iguales</td>
-                        </tr>
-                        <tr>
-                            <td>Qatar</td>
-                            <td>P1</td>
-                            <td class="points-gap">-12 pts</td>
-                            <td class="points-gap positive-gap">+4 pts</td>
-                        </tr>
-                        <tr class="final-row">
-                            <td>Abu Dhabi (Final)</td>
-                            <td>P1</td>
-                            <td class="points-gap final-gap">-2 pts</td>
-                            <td class="points-gap positive-gap">+11 pts</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p class="history-desc" style="margin-top: 15px; position:relative; z-index: 10;">La estadística pura de
-                    una cacería de leyenda. Tras estar 104 puntos por detrás de Piastri en Zandvoort, Max encadenó una
-                    racha brutal, neutralizó a Oscar en Las Vegas y persiguió a Lando hasta quedarse a un suspiro (-2
-                    pts) del título mundial en la última vuelta.</p>
-            </div>
         </div>
     </section>
 
@@ -378,15 +316,15 @@
                 <span class="stat-label">Campeonatos Mundiales</span>
             </div>
             <div class="stat-card">
-                <span class="stat-number" data-target="61">0</span>
+                <span class="stat-number" id="api-wins" data-target="61">0</span>
                 <span class="stat-label">Victorias en F1</span>
             </div>
             <div class="stat-card">
-                <span class="stat-number" data-target="111">0</span>
+                <span class="stat-number" id="api-podiums" data-target="111">0</span>
                 <span class="stat-label">Podios Alcanzados</span>
             </div>
             <div class="stat-card">
-                <span class="stat-number" data-target="40">0</span>
+                <span class="stat-number" id="api-poles" data-target="40">0</span>
                 <span class="stat-label">Pole Positions</span>
             </div>
         </div>

@@ -681,6 +681,26 @@ body {
   letter-spacing: 3px;
 }
 
+/* 👇 NUEVO: Alineación de la bandera con el nombre del GP 👇 */
+.title-with-flag {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.title-with-flag .circuit-name {
+    margin: 0; /* Anulamos los márgenes anteriores para que quede centrado con la bandera */
+}
+
+#dynamic-race-flag {
+    width: 24px;
+    height: auto;
+    border-radius: 2px;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+}
+
 /* ===============================
    SECCIÓN 3: FRASE DE MAX
 ================================== */
@@ -933,87 +953,6 @@ body {
   transform: translateY(0);
 }
 
-/* ===============================
-   ESTILOS DE LA TABLA F1 (TELEMETRÍA)
-================================== */
-.table-block {
-  position: relative;
-  overflow: hidden;
-  width: 45vw;
-  min-width: 550px;
-  background: rgba(10, 20, 40, 0.4);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  padding: 30px;
-}
-
-/* 🪄 Color verde para cuando supera al P2 */
-.positive-gap {
-  color: #00ff00 !important;
-  text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
-}
-
-.f1-telemetry-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: "Montserrat", sans-serif;
-  margin-top: 10px;
-}
-
-.f1-telemetry-table th {
-  text-align: left;
-  padding: 12px 10px;
-  color: #fcd700; /* Amarillo Red Bull */
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-.f1-telemetry-table td {
-  padding: 15px 10px;
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 500;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  transition: background-color 0.3s;
-}
-
-/* Efecto hover por fila para que parezca interactiva */
-.f1-telemetry-table tbody tr:hover td {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-.points-gap {
-  color: #a7a9ac;
-  font-family: monospace;
-  font-size: 16px !important;
-}
-
-/* La etiqueta de la carrera épica en Brasil */
-.badge-hero {
-  background-color: #cc0000;
-  color: #ffffff;
-  font-size: 9px;
-  font-weight: 900;
-  padding: 3px 6px;
-  border-radius: 3px;
-  margin-left: 10px;
-  vertical-align: middle;
-}
-
-/* Resaltado de la carrera final */
-.final-row td {
-  border-bottom: none;
-}
-
-.final-gap {
-  color: #cc0000;
-  font-weight: 900;
-  font-size: 22px !important;
-  text-shadow: 0 0 10px rgba(204, 0, 0, 0.4);
-}
 
 /* ===============================
    SECCIÓN 5: MURO DE RÉCORDS
@@ -1051,13 +990,6 @@ body {
   color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 2px;
-}
-
-/* ESTILO DEL NUEVO LOGO SVG DE RED BULL */
-.rb-svg {
-  width: 85%;
-  height: auto;
-  filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.2));
 }
 
 /* La cuadrícula de las tarjetas (ESTO FALTABA) */
@@ -1429,8 +1361,6 @@ body {
   z-index: -1;
   animation: merchWaves 20s linear infinite; /* Misma animación lenta y elegante */
 }
-
-/* El keyframes 'merchWaves' ya está definido en la sección anterior de tu CSS */
 
 .sponsors-main-container {
   width: 100%;
