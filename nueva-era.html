@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Era | Max Verstappen</title>
+    <link rel="icon" type="image/png" href="assets/images/max-logo-black.png?v=2">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-nueva-era.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Playfair+Display:ital,wght@0,400;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+</head>
+
+<body>
+    <div class="scrollbar-blocker"></div>
+
+    <header class="site-header">
+        <div class="brand-name">
+            <span class="first-name">MAX</span><br>
+            <span class="last-name">VERSTAPPEN</span>
+        </div>
+        <div class="center-logo">
+            <img src="assets/images/max-logo.png" alt="MV Logo">
+        </div>
+        <button class="menu-btn">
+            <span class="line line-1"></span>
+            <span class="line line-2"></span>
+        </button>
+    </header>
+
+    <nav class="fullscreen-menu">
+        <div class="menu-layout">
+            <div class="menu-left">
+                <div class="img-column col-1">
+                    <img src="assets/images/menu-2.jpg" alt="Max 1" id="img-1">
+                    <img src="assets/images/menu-4.jpg" alt="Max 2" id="img-2" class="color-active">
+                </div>
+                <div class="img-column col-2">
+                    <img src="assets/images/menu-3.jpg" alt="Max 3" id="img-3">
+                    <img src="assets/images/menu-1.jpg" alt="Max 4" id="img-4">
+                </div>
+            </div>
+            <div class="menu-right">
+                <ul>
+                    <li><a href="index.html" data-img="img-1">Inicio</a></li>
+                    <li style="position: relative;">
+                        <span class="current-page" data-img="img-2">
+                            Nueva Era
+                            <svg class="wavy-line" viewBox="0 0 200 30" preserveAspectRatio="none">
+                                <path d="M0,15 L60,15 C75,15 80,25 100,25 C120,25 125,15 140,15 L200,15" fill="none"
+                                    stroke="#cc0000" stroke-width="4"></path>
+                            </svg>
+                        </span>
+                    </li>
+                    <li><a href="#" data-img="img-3">Fuera de Pista</a></li>
+                    <li><a href="#" data-img="img-4">Calendario</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="ep-hero">
+            <video src="assets/videos/max-short.mp4" autoplay loop muted playsinline class="ep-bg-video"></video>
+            <div class="ep-bg-glow"></div>
+
+            <div class="ep-hero-content">
+                <div class="ep-text-box">
+                    <span class="ep-subtitle">RB2026 // EL SIGUIENTE CAPÍTULO</span>
+                    <h1 class="ep-title">NUEVA <span class="red-text">ERA</span></h1>
+                    <p class="ep-desc">Una máquina diseñada para el futuro, ganada con la sangre fría del pasado. Antes
+                        de desatar el poder del 2026, analiza la telemetría de la remontada imposible que lo consagró
+                        como leyenda absoluta.</p>
+                </div>
+
+                <div class="ep-video-box">
+                    <video src="assets/videos/max-short.mp4" autoplay loop muted playsinline
+                        class="ep-vertical-video"></video>
+                    <div class="ep-video-frame"></div>
+                    <div class="ep-video-tag">ONBOARD / RB20</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ep-telemetry-section">
+            <div class="ep-section-header">
+                <h2>CACERÍA DE <span class="red-text">LEYENDA</span></h2>
+                <p>La estadística pura de cómo neutralizar una desventaja de 104 puntos en media temporada.</p>
+            </div>
+
+            <div class="ep-table-container">
+                <span class="ep-table-label">TRACKING DE LA REMONTADA 2025</span>
+                <table class="f1-telemetry-table">
+                    <thead>
+                        <tr>
+                            <th>GRAN PREMIO</th>
+                            <th>RES. MAX</th>
+                            <th>VS NORRIS</th>
+                            <th>VS PIASTRI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Países Bajos (El fondo)</td>
+                            <td>P2</td>
+                            <td class="points-gap">-70 pts</td>
+                            <td class="points-gap">-104 pts</td>
+                        </tr>
+                        <tr>
+                            <td>Estados Unidos</td>
+                            <td>P1</td>
+                            <td class="points-gap">-26 pts</td>
+                            <td class="points-gap">-40 pts</td>
+                        </tr>
+                        <tr>
+                            <td>México</td>
+                            <td>P3</td>
+                            <td class="points-gap">-36 pts</td>
+                            <td class="points-gap">-35 pts</td>
+                        </tr>
+                        <tr>
+                            <td>Brasil <span class="badge-hero">PITLANE TO P3</span></td>
+                            <td>P3</td>
+                            <td class="points-gap">-49 pts</td>
+                            <td class="points-gap">-25 pts</td>
+                        </tr>
+                        <tr>
+                            <td>Las Vegas</td>
+                            <td>P1</td>
+                            <td class="points-gap">-24 pts</td>
+                            <td class="points-gap">Iguales</td>
+                        </tr>
+                        <tr>
+                            <td>Qatar</td>
+                            <td>P1</td>
+                            <td class="points-gap">-12 pts</td>
+                            <td class="points-gap positive-gap">+4 pts</td>
+                        </tr>
+                        <tr class="final-row">
+                            <td>Abu Dhabi (Final)</td>
+                            <td>P1</td>
+                            <td class="points-gap final-gap">-2 pts</td>
+                            <td class="points-gap positive-gap">+11 pts</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="ne-helmet-section">
+            <div class="ne-helmet-content">
+
+                <div class="ne-helmet-text">
+                    <span class="ne-subtitle">LA ARMADURA DEL GUERRERO</span>
+                    <h2 class="ne-section-title">VISIÓN DE <span class="red-text">CAMPEÓN</span></h2>
+                    <p class="ne-desc">El diseño definitivo para la temporada 2026. Forjado para la velocidad extrema,
+                        aerodinámica de precisión y la intimidación pura. Explora cada ángulo de la armadura del
+                        tetracampeón.</p>
+                    <div class="ne-deco-line"></div>
+                </div>
+
+                <div class="ne-helmet-accordion">
+                    <div class="accordion-item">
+                        <img src="assets/images/casco-1.jpg" alt="Vista 1">
+                        <div class="accordion-overlay"><span>01</span></div>
+                    </div>
+                    <div class="accordion-item">
+                        <img src="assets/images/casco-2.jpg" alt="Vista 2">
+                        <div class="accordion-overlay"><span>02</span></div>
+                    </div>
+                    <div class="accordion-item">
+                        <img src="assets/images/casco-3.jpg" alt="Vista 3">
+                        <div class="accordion-overlay"><span>03</span></div>
+                    </div>
+                    <div class="accordion-item">
+                        <img src="assets/images/casco-4.jpg" alt="Vista 4">
+                        <div class="accordion-overlay"><span>04</span></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="mv-footer">
+        <div class="footer-glow"></div>
+        <div class="footer-car-background"></div>
+        <div class="footer-content">
+            <div class="footer-top-row">
+                <h2 class="footer-slogan">SIMPLY<br><span class="red-text">LOVELY.</span></h2>
+                <div class="footer-nav">
+                    <a href="index.html" class="f-link">INICIO</a>
+                    <span class="f-link active-page">
+                        NUEVA ERA
+                        <svg class="wavy-line-footer" viewBox="0 0 200 30" preserveAspectRatio="none">
+                            <path d="M0,15 L60,15 C75,15 80,25 100,25 C120,25 125,15 140,15 L200,15" fill="none"
+                                stroke="#cc0000" stroke-width="4"></path>
+                        </svg>
+                    </span>
+                    <a href="fuera-de-pista.html" class="f-link">FUERA DE PISTA</a>
+                    <a href="https://store.verstappen.com/en/" target="_blank" rel="noopener noreferrer"
+                        class="f-link">TIENDA MV1</a>
+                </div>
+            </div>
+            <div class="footer-middle-row">
+                <div class="f-socials">
+                    <a href="#" class="social-pill"><i class="fab fa-instagram"></i> <span>INSTAGRAM</span></a>
+                    <a href="#" class="social-pill"><i class="fa-brands fa-x-twitter"></i> <span>X (TWITTER)</span></a>
+                    <a href="#" class="social-pill"><i class="fab fa-twitch"></i> <span>TWITCH</span></a>
+                </div>
+                <div class="f-info">
+                    <p class="f-info-title">MV1 / ORACLE RED BULL RACING</p>
+                    <p class="f-info-desc">El futuro del dominio absoluto.</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-legal">
+            <p>&copy; 2026 MAX VERSTAPPEN. UNSTOPPABLE.</p>
+            <div class="legal-links-2">
+                <a href="#">Privacidad</a>
+                <a href="#">Términos</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script-nueva-era.js"></script>
+</body>
+
+</html>
