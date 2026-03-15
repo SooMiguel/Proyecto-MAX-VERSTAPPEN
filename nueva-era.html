@@ -10,17 +10,58 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style-nueva-era.css">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Playfair+Display:ital,wght@0,400;1,400&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+
+    <style>
+        #rbTransition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 999999;
+            display: block;
+            pointer-events: none;
+        }
+
+        .rb-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: translateY(0%);
+        }
+
+        .rb-yellow {
+            background-color: #fcd700;
+            z-index: 1;
+        }
+
+        .rb-red {
+            background-color: #cc0000;
+            z-index: 2;
+        }
+
+        .rb-navy {
+            background: radial-gradient(circle at center, #1062b1 0%, #0A192F 100%);
+            z-index: 3;
+        }
+    </style>
 </head>
 
 <body>
+    <div class="rb-transition" id="rbTransition">
+        <div class="rb-layer rb-yellow"></div>
+        <div class="rb-layer rb-red"></div>
+        <div class="rb-layer rb-navy"></div>
+    </div>
+
     <div class="scrollbar-blocker"></div>
 
     <header class="site-header">
@@ -29,7 +70,7 @@
             <span class="last-name">VERSTAPPEN</span>
         </div>
         <div class="center-logo">
-            <img src="assets/images/max-logo.png" alt="MV Logo">
+            <a href="index.html"><img src="assets/images/max-logo.png" alt="MV Logo"></a>
         </div>
         <button class="menu-btn">
             <span class="line line-1"></span>
@@ -94,7 +135,7 @@
         <section class="ep-telemetry-section">
             <div class="ep-section-header">
                 <h2>CACERÍA DE <span class="red-text">LEYENDA</span></h2>
-                <p>La estadística pura de cómo neutralizar una desventaja de 104 puntos en media temporada.</p>
+                <p>La estadística pura de cómo neutralizar una desventaja de 104 puntos en media temporada 2025.</p>
             </div>
 
             <div class="ep-table-container">
@@ -157,14 +198,25 @@
         </section>
 
         <section class="ne-helmet-section">
-            <div class="ne-helmet-content">
+            <video autoplay loop muted playsinline class="ne-bg-video">
+                <source src="assets/videos/casco-video.mp4" type="video/mp4">
+            </video>
+            
+            <div class="ne-bg-glow"></div>
 
+            <div class="ne-helmet-content">
                 <div class="ne-helmet-text">
-                    <span class="ne-subtitle">LA ARMADURA DEL GUERRERO</span>
-                    <h2 class="ne-section-title">VISIÓN DE <span class="red-text">CAMPEÓN</span></h2>
-                    <p class="ne-desc">El diseño definitivo para la temporada 2026. Forjado para la velocidad extrema,
-                        aerodinámica de precisión y la intimidación pura. Explora cada ángulo de la armadura del
-                        tetracampeón.</p>
+                    <span class="ne-subtitle">IDENTIDAD Y LEGADO</span>
+                    <h2 class="ne-section-title">EL CASCO <span class="red-text">2026</span></h2>
+                    <p class="ne-desc">
+                        Basado en el diseño original de su padre que usaba a los cuatro años, mantiene su esencia:
+                        estética limpia, las líneas de la bandera neerlandesa y su icónico león en la parte superior.
+                        <br><br>
+                        <strong>Novedades de la nueva era:</strong> Incorpora los logotipos azules de
+                        <strong>Ford</strong> en las sienes marcando el inicio de Red Bull Ford Powertrains, un acabado
+                        con laca de alto brillo para destacar en la cabina, y cuatro estrellas en la parte trasera
+                        celebrando sus títulos mundiales.
+                    </p>
                     <div class="ne-deco-line"></div>
                 </div>
 
@@ -186,10 +238,104 @@
                         <div class="accordion-overlay"><span>04</span></div>
                     </div>
                 </div>
-
             </div>
         </section>
+
+        <section class="pu-section">
+            <div class="pu-background">
+                <img src="assets/images/ford-engine.webp" alt="Motor DM01" class="pu-bg-img">
+                <div class="pu-overlay"></div>
+            </div>
+
+            <div class="pu-content">
+                <div class="pu-hero-split">
+                    <div class="pu-header">
+                        <span class="pu-subtitle">ORACLE RED BULL RACING // RB22</span>
+                        <h2 class="pu-title">LA NUEVA PIEL DE LA <span class="red-text">BESTIA</span></h2>
+                        <p class="pu-desc">El inicio de una nueva e importante era. El RB22 deslumbra con una impactante
+                            decoración en azul de competición, nítidos detalles en blanco y un acabado de pintura
+                            brillante que rinde homenaje a los orígenes del equipo en su debut en la F1 en 2005.</p>
+                    </div>
+
+                    <div class="pu-car-showcase">
+                        <div class="car-glow-effect"></div>
+                        <div class="tech-carousel" id="rb26-carousel">
+                            <div class="tech-slide active"><img src="assets/images/rb22-car.jpg" alt="Vista 1"></div>
+                            <div class="tech-slide next"><img src="assets/images/rb22-1.jpg.avif" alt="Vista 2"></div>
+                            <div class="tech-slide hidden"><img src="assets/images/rb22-2.avif" alt="Vista 3"></div>
+                            <div class="tech-slide hidden"><img src="assets/images/rb22-3.avif" alt="Vista 4"></div>
+                            <div class="tech-slide prev"><img src="assets/images/autoredbull.jpg" alt="Vista 5"></div>
+                        </div>
+
+                        <div class="carousel-progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pu-grid">
+                    <div class="pu-card">
+                        <div class="pu-card-icon"><i class="fa-solid fa-droplet"></i></div>
+                        <h3>TRIBUTO A LOS ORÍGENES</h3>
+                        <p>Un regreso espectacular a la laca de alto brillo. Esta decoración celebra el espíritu y el
+                            sueño del fundador <strong>Dietrich Mateschitz</strong>, dándole al monoplaza un resplandor
+                            único bajo los focos de la pista.</p>
+                    </div>
+
+                    <div class="pu-card">
+                        <div class="pu-card-icon"><i class="fa-solid fa-compress"></i></div>
+                        <h3>CHASIS EVOLUCIONADO</h3>
+                        <p>Diseñado por el equipo de Pierre Waché, el RB22 abandona el tamaño histórico para ser
+                            <strong>más estrecho, corto y ligero</strong>. Una arquitectura creada para favorecer el
+                            cuerpo a cuerpo y maximizar la agilidad.</p>
+                    </div>
+
+                    <div class="pu-card">
+                        <div class="pu-card-icon"><i class="fa-solid fa-wind"></i></div>
+                        <h3>AERODINÁMICA ACTIVA</h3>
+                        <p>El alerón cobra vida. El coche muta en pista: el <strong>Mode X</strong> aplana los alerones
+                            para aniquilar la resistencia en rectas, y el <strong>Mode Z</strong> maximiza la carga
+                            aerodinámica para devorar las curvas.</p>
+                    </div>
+
+                    <div class="pu-card">
+                        <div class="pu-card-icon"><i class="fa-solid fa-handshake"></i></div>
+                        <h3>EL SELLO FORD</h3>
+                        <p>La nueva carrocería cierra el círculo de una asociación legendaria. Los sutiles pero
+                            impactantes logotipos azules de <strong>Ford</strong> adornan el monoplaza, marcando
+                            visualmente la era Red Bull Ford Powertrains.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ne-coda-section">
+            <div class="coda-image-wrapper">
+                <img src="assets/images/cierre-nueva-era.jpg" alt="Max Verstappen 2026" class="coda-bg-img">
+            </div>
+            
+            <div class="coda-gradient"></div>
+
+            <div class="coda-content">
+                <div class="coda-badge">PREPARADOS PARA LA GUERRA</div>
+                <h2 class="coda-quote">"EL COCHE ES NUEVO.<br>EL OBJETIVO ES <span class="red-text">EL MISMO.</span>"</h2>
+                <p class="coda-text">La reglamentación de 2026 resetea la parrilla, pero no la mentalidad del tetracampeón. La cacería por el quinto título ha comenzado.</p>
+                
+                <a href="#" class="coda-btn" data-img="img-4">
+                    <span>EXPLORAR CALENDARIO 2026</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </section>
+
     </main>
+
+    <div class="back-to-top" id="backToTop">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M12 19V5M5 12l7-7 7 7"></path>
+        </svg>
+    </div>
 
     <footer class="mv-footer">
         <div class="footer-glow"></div>
@@ -213,9 +359,9 @@
             </div>
             <div class="footer-middle-row">
                 <div class="f-socials">
-                    <a href="#" class="social-pill"><i class="fab fa-instagram"></i> <span>INSTAGRAM</span></a>
-                    <a href="#" class="social-pill"><i class="fa-brands fa-x-twitter"></i> <span>X (TWITTER)</span></a>
-                    <a href="#" class="social-pill"><i class="fab fa-twitch"></i> <span>TWITCH</span></a>
+                    <a href="https://www.instagram.com/maxverstappen1/" class="social-pill" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> <span>INSTAGRAM</span></a>
+                    <a href="https://x.com/Max33Verstappen" class="social-pill" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i> <span>X (TWITTER)</span></a>
+                    <a href="https://www.twitch.tv/teamredline" class="social-pill" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitch"></i> <span>TWITCH</span></a>
                 </div>
                 <div class="f-info">
                     <p class="f-info-title">MV1 / ORACLE RED BULL RACING</p>
@@ -232,7 +378,10 @@
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script src="transitions.js"></script>
     <script src="script-nueva-era.js"></script>
 </body>
-
 </html>

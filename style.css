@@ -683,22 +683,22 @@ body {
 
 /* 👇 NUEVO: Alineación de la bandera con el nombre del GP 👇 */
 .title-with-flag {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 5px;
-    margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
 }
 
 .title-with-flag .circuit-name {
-    margin: 0; /* Anulamos los márgenes anteriores para que quede centrado con la bandera */
+  margin: 0; /* Anulamos los márgenes anteriores para que quede centrado con la bandera */
 }
 
 #dynamic-race-flag {
-    width: 24px;
-    height: auto;
-    border-radius: 2px;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+  width: 24px;
+  height: auto;
+  border-radius: 2px;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
 }
 
 /* ===============================
@@ -952,7 +952,6 @@ body {
   visibility: visible;
   transform: translateY(0);
 }
-
 
 /* ===============================
    SECCIÓN 5: MURO DE RÉCORDS
@@ -1601,11 +1600,11 @@ body {
 
 /* Enlaces de Navegación */
 .footer-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    text-align: right;
-    align-items: flex-end; /* 👇 ESTA LÍNEA ES LA MAGIA: Obliga a la caja a encogerse al tamaño exacto de la palabra 👇 */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: right;
+  align-items: flex-end; /* 👇 ESTA LÍNEA ES LA MAGIA: Obliga a la caja a encogerse al tamaño exacto de la palabra 👇 */
 }
 
 .f-link {
@@ -1735,21 +1734,133 @@ body {
 
 /* --- Estado Activo en el Footer (Página actual) --- */
 .f-link.active-page {
-    color: #ffffff !important; 
-    pointer-events: none !important; /* 🚫 ¡Bloqueo absoluto de clics y hovers! */
-    cursor: default !important; 
-    display: inline-block;
-    position: relative;
+  color: #ffffff !important;
+  pointer-events: none !important; /* 🚫 ¡Bloqueo absoluto de clics y hovers! */
+  cursor: default !important;
+  display: inline-block;
+  position: relative;
 }
 
 /* Línea ondulada (Estilo tachado por el medio) */
 .wavy-line-footer {
-    position: absolute;
-    top: 50%; /* Lo bajamos a la mitad exacta de la palabra */
-    left: 0;
-    width: 100%;
-    height: 12px; 
-    transform: translateY(-50%); /* Ajuste fino para centrarlo verticalmente */
-    overflow: visible;
-    z-index: 2; /* Para que la línea pase por encima de las letras */
+  position: absolute;
+  top: 50%; /* Lo bajamos a la mitad exacta de la palabra */
+  left: 0;
+  width: 100%;
+  height: 12px;
+  transform: translateY(-50%); /* Ajuste fino para centrarlo verticalmente */
+  overflow: visible;
+  z-index: 2; /* Para que la línea pase por encima de las letras */
+}
+
+/* ============================================================
+   TRANSICIÓN DE PÁGINA (COLORES RED BULL 2026)
+=============================================================== */
+.transition-wipe {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
+  pointer-events: none; /* JS lo cambiará cuando sea necesario */
+  display: block;
+  overflow: hidden;
+}
+
+.wipe-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+.wipe-yellow {
+  background-color: #fcd700; /* Amarillo Red Bull */
+  transform: translateY(100%);
+  z-index: 1;
+}
+
+.wipe-red {
+  background-color: #cc0000; /* Rojo Red Bull */
+  transform: translateY(100%);
+  z-index: 2;
+}
+
+.wipe-blue {
+  background-color: #0a192f; /* Azul Marino Profundo Oracle Red Bull */
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wipe-text {
+  font-family: "Playfair Display", serif;
+  font-size: 45px;
+  font-style: italic;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 5px;
+}
+
+/* ============================================================
+   TRANSICIÓN RED BULL (ACELERACIÓN POR GPU - SIN DELAY)
+=============================================================== */
+.rb-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* Las franjas esperan escondidas arriba */
+.rb-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateY(-100%);
+  will-change: transform;
+  /* Velocidad y fluidez gestionada por la tarjeta gráfica */
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.rb-yellow {
+  background-color: #fcd700;
+  z-index: 1;
+}
+.rb-red {
+  background-color: #cc0000;
+  z-index: 2;
+}
+.rb-navy {
+  background: radial-gradient(circle at center, #1062b1 0%, #0a192f 100%);
+  z-index: 3;
+}
+
+/* === ACTIVACIÓN AL HACER CLIC === */
+.rb-transition.is-active {
+  visibility: visible;
+  pointer-events: all;
+}
+
+.rb-transition.is-active .rb-yellow {
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+.rb-transition.is-active .rb-red {
+  transform: translateY(0);
+  transition-delay: 0.1s;
+}
+.rb-transition.is-active .rb-navy {
+  transform: translateY(0);
+  transition-delay: 0.2s;
 }
