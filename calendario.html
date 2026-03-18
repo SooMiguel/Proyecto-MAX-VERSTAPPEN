@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario Táctico 2026 | Max Verstappen</title>
+    <link rel="icon" type="image/png" href="assets/images/max-logo-black.png?v=2">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-calendario.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Playfair+Display:ital,wght@0,400;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+
+    <style>
+        #rbTransition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 999999;
+            display: block;
+            pointer-events: none;
+        }
+
+        .rb-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: translateY(0%);
+        }
+
+        .rb-yellow {
+            background-color: #fcd700;
+            z-index: 1;
+        }
+
+        .rb-red {
+            background-color: #cc0000;
+            z-index: 2;
+        }
+
+        .rb-navy {
+            background: radial-gradient(circle at center, #1062b1 0%, #0A192F 100%);
+            z-index: 3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="rb-transition" id="rbTransition">
+        <div class="rb-layer rb-yellow"></div>
+        <div class="rb-layer rb-red"></div>
+        <div class="rb-layer rb-navy"></div>
+    </div>
+
+    <div class="scrollbar-blocker"></div>
+
+    <header class="site-header">
+        <div class="brand-name">
+            <span class="first-name">MAX</span><br>
+            <span class="last-name">VERSTAPPEN</span>
+        </div>
+        <div class="center-logo">
+            <a href="index.html"><img src="assets/images/max-logo.png" alt="MV Logo"></a>
+        </div>
+        <button class="menu-btn">
+            <span class="line line-1"></span>
+            <span class="line line-2"></span>
+        </button>
+    </header>
+
+    <nav class="fullscreen-menu">
+        <div class="menu-layout">
+            <div class="menu-left">
+                <div class="img-column col-1">
+                    <img src="assets/images/menu-2.jpg" alt="Max 1" id="img-1">
+                    <img src="assets/images/menu-4.jpg" alt="Max 2" id="img-2">
+                </div>
+                <div class="img-column col-2">
+                    <img src="assets/images/menu-3.jpg" alt="Max 3" id="img-3">
+                    <img src="assets/images/menu-1.jpg" alt="Max 4" id="img-4" class="color-active">
+                </div>
+            </div>
+            <div class="menu-right">
+                <ul>
+                    <li><a href="index.html" data-img="img-1">Inicio</a></li>
+                    <li><a href="nueva-era.html" data-img="img-2">Nueva Era</a></li>
+                    <li><a href="fuera-de-pista.html" data-img="img-3">Fuera de Pista</a></li>
+                    <li style="position: relative;">
+                        <span class="current-page" data-img="img-4">
+                            Calendario
+                            <svg class="wavy-line" viewBox="0 0 200 30" preserveAspectRatio="none">
+                                <path d="M0,15 L60,15 C75,15 80,25 100,25 C120,25 125,15 140,15 L200,15" fill="none"
+                                    stroke="#cc0000" stroke-width="4"></path>
+                            </svg>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="cal-hero">
+            <div class="cal-hero-bg" style="background-image: url('assets/images/max-hero-cal.png');"></div>
+            <div class="cal-hero-gradient"></div>
+
+            <div class="cal-hero-content">
+                <div class="cal-hero-header-text">
+                    <span class="cal-badge">CENTRO TÁCTICO // 2026</span>
+                    <h1 class="cal-title">PRÓXIMA <span class="red-text">BATALLA</span></h1>
+                </div>
+
+                <div class="cal-hero-card expanded-card">
+                    <div class="ch-track-col">
+                        <div class="ch-track">
+                            <img src="assets/images/japan-track.png" alt="Suzuka Track" class="track-svg">
+                        </div>
+                        <div class="ch-track-stats" id="dynamic-track-stats">
+                        </div>
+                    </div>
+
+                    <div class="ch-info-col">
+                        <span class="tag-f1">FORMULA 1</span>
+                        <h2 id="dynamic-race-title">GP JAPÓN <span class="flag">🇯🇵</span></h2>
+
+                        <div class="cal-countdown">
+                            <div class="cd-item"><span id="cd-days">00</span><label>DÍAS</label></div>
+                            <div class="cd-item"><span id="cd-hours">00</span><label>HRS</label></div>
+                            <div class="cd-item"><span id="cd-mins">00</span><label>MIN</label></div>
+                        </div>
+
+                        <div class="ch-schedule">
+                            <h4>CRONOGRAMA (HORA LOCAL)</h4>
+                            <ul class="schedule-list" id="dynamic-schedule">
+                                <li>Cargando telemetría...</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cal-list-section">
+            <div class="cal-list-glow"></div>
+
+            <div class="cal-filters">
+                <button class="cal-filter-btn active" data-filter="all">TODO</button>
+                <button class="cal-filter-btn" data-filter="f1">FORMULA 1</button>
+                <button class="cal-filter-btn" data-filter="gt3">GT3 / ENDURANCE</button>
+            </div>
+
+            <div class="cal-timeline">
+
+                <div class="cal-card" data-category="gt3">
+                    <div class="cal-date">
+                        <span class="cal-day">21</span><span class="cal-month">MAR</span>
+                    </div>
+                    <div class="cal-info">
+                        <span class="tag-gt3">NLS / GT3</span>
+                        <h3>NLS Ronda 2</h3>
+                        <p>Nürburgring Nordschleife <i class="fa-solid fa-cloud-rain"></i></p>
+                    </div>
+                    <div class="cal-card-img">
+                        <img src="assets/images/gt3-nurburg.webp" alt="Max GT3">
+                        <div class="card-overlay-glow"></div>
+                    </div>
+                </div>
+
+                <div class="cal-card next-race" data-category="f1">
+                    <div class="cal-date">
+                        <span class="cal-day">29</span><span class="cal-month">MAR</span>
+                    </div>
+                    <div class="cal-info">
+                        <span class="tag-f1 sprint">FORMULA 1 + SPRINT</span>
+                        <h3>GP DE JAPÓN <i class="fa-solid fa-flag-checkered"></i></h3>
+                        <p>Circuito de Suzuka // <span class="red-text">Siguiente Batalla</span></p>
+                    </div>
+                    <div class="cal-card-img">
+                        <img src="assets/images/suzuka-pre.webp" alt="Suzuka Track">
+                        <div class="card-overlay-glow"></div>
+                    </div>
+                </div>
+
+                <div class="cal-card cancelled" data-category="f1">
+                    <div class="cancelled-stamp">BLOQUEADO POR FUERZA MAYOR</div>
+                    <div class="cal-date">
+                        <span class="cal-day">12</span><span class="cal-month">ABR</span>
+                    </div>
+                    <div class="cal-info">
+                        <span class="tag-cancelled">ANULADO</span>
+                        <h3>GP DE BAHRÉIN</h3>
+                        <p>Sakhir Circuit // Conflicto geopolítico</p>
+                    </div>
+                    <div class="cal-card-img">
+                        <img src="assets/images/bahrain-pre.webp" alt="Bahrain">
+                        <div class="card-overlay-glow"></div>
+                    </div>
+                </div>
+
+                <div class="cal-card cancelled" data-category="f1">
+                    <div class="cancelled-stamp">BLOQUEADO POR FUERZA MAYOR</div>
+                    <div class="cal-date">
+                        <span class="cal-day">19</span><span class="cal-month">ABR</span>
+                    </div>
+                    <div class="cal-info">
+                        <span class="tag-cancelled">ANULADO</span>
+                        <h3>GP DE ARABIA SAUDITA</h3>
+                        <p>Jeddah Corniche Circuit // Conflicto geopolítico</p>
+                    </div>
+                    <div class="cal-card-img">
+                        <img src="assets/images/jeddah-pre.webp" alt="Jeddah">
+                        <div class="card-overlay-glow"></div>
+                    </div>
+                </div>
+
+                <div class="cal-card" data-category="f1">
+                    <div class="cal-date">
+                        <span class="cal-day">03</span><span class="cal-month">MAY</span>
+                    </div>
+                    <div class="cal-info">
+                        <span class="tag-f1">FORMULA 1</span>
+                        <h3>GP DE MIAMI</h3>
+                        <p>Miami International Autodrome</p>
+                    </div>
+                    <div class="cal-card-img">
+                        <img src="assets/images/miami-pre.webp" alt="Miami">
+                        <div class="card-overlay-glow"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="cal-results-section">
+            <div class="results-header">
+                <div class="results-title-box">
+                    <h2 class="results-title">FORMULA 1</h2>
+                    <h2 class="results-title outline-text">ALL RESULTS</h2>
+                </div>
+                <p class="results-subtitle">El registro histórico completo circuito por circuito. Haz clic en cada año
+                    para desplegar la telemetría oficial de la FIA.</p>
+            </div>
+
+            <div id="historical-accordion-container" class="accordion-container">
+                <div style="padding: 40px; text-align: center; color: #a7a9ac; font-size: 14px; letter-spacing: 2px;">
+                    <i class="fa-solid fa-circle-notch fa-spin"></i> DESCARGANDO TELEMETRÍA OFICIAL...
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button id="backToTop" class="back-to-top" aria-label="Volver al inicio">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M12 19V5M5 12l7-7 7 7" />
+        </svg>
+    </button>
+
+    <footer class="mv-footer">
+        <div class="footer-glow"></div>
+        <div class="footer-car-background"></div>
+        <div class="footer-content">
+            <div class="footer-top-row">
+                <h2 class="footer-slogan">SIMPLY<br><span class="red-text">LOVELY.</span></h2>
+                <div class="footer-nav">
+                    <a href="index.html" class="f-link">INICIO</a>
+                    <a href="nueva-era.html" class="f-link">NUEVA ERA</a>
+                    <a href="fuera-de-pista.html" class="f-link">FUERA DE PISTA</a>
+                    <span class="f-link active-page">
+                        CALENDARIO
+                        <svg class="wavy-line-footer" viewBox="0 0 200 30" preserveAspectRatio="none">
+                            <path d="M0,15 L60,15 C75,15 80,25 100,25 C120,25 125,15 140,15 L200,15" fill="none"
+                                stroke="#cc0000" stroke-width="4"></path>
+                        </svg>
+                    </span>
+                    <a href="https://store.verstappen.com/en/" target="_blank" rel="noopener noreferrer"
+                        class="f-link">TIENDA MV1</a>
+                </div>
+            </div>
+
+            <div class="footer-middle-row">
+                <div class="f-socials">
+                    <a href="https://www.instagram.com/maxverstappen1/" class="social-pill" target="_blank"
+                        rel="noopener noreferrer"><i class="fab fa-instagram"></i> <span>INSTAGRAM</span></a>
+                    <a href="https://x.com/Max33Verstappen" class="social-pill" target="_blank"
+                        rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i> <span>X (TWITTER)</span></a>
+                    <a href="https://www.twitch.tv/teamredline" class="social-pill" target="_blank"
+                        rel="noopener noreferrer"><i class="fab fa-twitch"></i> <span>TWITCH</span></a>
+                </div>
+                <div class="f-info">
+                    <p class="f-info-title">MV1 / ORACLE RED BULL RACING</p>
+                    <p class="f-info-desc">El futuro del dominio absoluto.</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-legal">
+            <p>&copy; 2026 MAX VERSTAPPEN. UNSTOPPABLE.</p>
+            <div class="legal-links-2">
+                <a href="#">Privacidad</a>
+                <a href="#">Términos</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="transitions.js"></script>
+    <script src="script-calendario.js"></script>
+</body>
+
+</html>
